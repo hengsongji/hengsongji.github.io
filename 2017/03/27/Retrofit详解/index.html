@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Retrofit详解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考:Retrofit官方介绍
+首先我们根据官方介绍写一个Demo，然后跟踪一次HTTP请求，参观一遍Retrofit的实现过程。
+写一个Demo
+使用Retrofit时，你需要把HTTP API转化为Java接口。
+1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;Li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit详解">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/Retrofit详解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考:Retrofit官方介绍
+首先我们根据官方介绍写一个Demo，然后跟踪一次HTTP请求，参观一遍Retrofit的实现过程。
+写一个Demo
+使用Retrofit时，你需要把HTTP API转化为Java接口。
+1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;Li">
+<meta property="og:updated_time" content="2017-03-27T17:10:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit详解">
+<meta name="twitter:description" content="参考:Retrofit官方介绍
+首先我们根据官方介绍写一个Demo，然后跟踪一次HTTP请求，参观一遍Retrofit的实现过程。
+写一个Demo
+使用Retrofit时，你需要把HTTP API转化为Java接口。
+1234public interface GitHubService &amp;#123;  @GET(&quot;users/&amp;#123;user&amp;#125;/repos&quot;)  Call&amp;lt;Li">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Retrofit详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Retrofit详解/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Retrofit详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考:<br><a href="http://square.github.io/retrofit/" target="_blank" rel="external">Retrofit官方介绍</a></p>
+<p>首先我们根据官方介绍写一个Demo，然后跟踪一次HTTP请求，参观一遍Retrofit的实现过程。</p>
+<h2 id="写一个Demo"><a href="#写一个Demo" class="headerlink" title="写一个Demo"></a>写一个Demo</h2><ol>
+<li><p>使用Retrofit时，你需要把HTTP API转化为Java接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">  <span class="meta">@GET</span>(<span class="string">"users/&#123;user&#125;/repos"</span>)</div><div class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(<span class="meta">@Path</span>(<span class="string">"user"</span>) String user);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Retrofit生成一个实现GitHubService接口的实体类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">  .baseUrl(<span class="string">"https://api.github.com/"</span>)</div><div class="line">  .build();</div><div class="line"></div><div class="line">GitHubService service = retrofit.create(GitHubService.class);</div></pre></td></tr></table></figure>
+</li>
+<li><p>再由上述service生成Call对象就可以同步/异步执行HTTP请求了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"octocat"</span>);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上是使用方法的官方介绍(只列出了主要步骤)，下面是我据此实现的一个Demo。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RetrofitDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BASE_URL=<span class="string">"https://api.github.com/"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">        <span class="meta">@GET</span>(<span class="string">"users/&#123;user&#125;/repos"</span>)</div><div class="line">        Call&lt;List&lt;Repo&gt;&gt; listRepos(<span class="meta">@Path</span>(<span class="string">"user"</span>) String user);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Repo</span></span>&#123;</div><div class="line">        <span class="keyword">public</span> String id;</div><div class="line">        <span class="keyword">public</span> String name;</div><div class="line">        <span class="meta">@SerializedName</span>(<span class="string">"full_name"</span>)</div><div class="line">        <span class="keyword">public</span> String fullName;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(BASE_URL)</div><div class="line">                .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                .build();</div><div class="line">        GitHubService service = retrofit.create(GitHubService.class);</div><div class="line">        Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"square"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Response&lt;List&lt;Repo&gt;&gt; response = repos.execute();</div><div class="line">            System.out.println(response.body().size());</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从这个Demo我们就可以看出Retrofit的优越性：</p>
+<ul>
+<li>封装了几乎所有的网络操作，把使用者从大量繁琐且重复的工作中解放出来；</li>
+<li>业务逻辑简洁明了，提高了代码的可读性；</li>
+<li>面向接口编程，提供了高扩展性。</li>
+</ul>
+<h2 id="跟随HTTP请求，洞悉Retrofit的内部世界"><a href="#跟随HTTP请求，洞悉Retrofit的内部世界" class="headerlink" title="跟随HTTP请求，洞悉Retrofit的内部世界"></a>跟随HTTP请求，洞悉Retrofit的内部世界</h2><p>以下内容以上述Demo为样例。</p>
+<p>我们可以看到就是下面的代码执行了HTTP请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">repos.execute()</div></pre></td></tr></table></figure>
+<p>在跟踪execute方法之前，我们先来看一下repos的身世：我们调用GitHubService的接口方法返回了一个Call<list<repo>&gt;对象，即repos。也就是说，这里的service实现了GitHubService接口。相信你看到这里也和我一样，一脸懵。下面我们就看看这个service是怎么生成的，为什么它能够返回一个Call<list<repo>&gt;对象。</list<repo></list<repo></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Retrofit.java 仅展示相关代码</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">create</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; service)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> (T) Proxy.newProxyInstance(service.getClassLoader(), <span class="keyword">new</span> Class&lt;?&gt;[] &#123; service &#125;,</div><div class="line">        <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line"></div><div class="line">          <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">              <span class="keyword">throws</span> Throwable &#123;</div><div class="line">            ...</div><div class="line">            ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">            OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">            <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原来是利用Java Proxy生成了GitHubService的实现类，并生成了该类对应的对象。关于Java Proxy的知识还请自行百度，这里只大概讲一下。</p>
+<p>这个方法的原型是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Object <span class="title">newProxyInstance</span><span class="params">(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span></div></pre></td></tr></table></figure></p>
+<p>动态代理其实就是java.lang.reflect.Proxy类动态地根据指定的接口生成一个class byte，该class会继承Proxy类，并实现所有你指定的接口（您在参数中传入的接口数组）；然后再利用指定的ClassLoader将class byte加载进系统，最后生成这样一个类的对象，并初始化该对象的一些值，如InvocationHandler,以及所有的接口对应的Method成员。 初始化之后将对象返回给调用的客户端。这样客户端拿到的就是一个实现你所有的接口的Proxy对象。</p>
+<p>我们做个简单的总结，Retrofit.create方法生成了GitHubService的代理对象service，service中的所有方法都交由InvocationHandler来处理。也就是说，InvocationHandler.invoke方法形成了一个切面，承载了GitHubService中所有方法的具体实现。</p>
+<p>再来看下InvocationHandler.invoke都做了些什么工作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">    <span class="keyword">throws</span> Throwable &#123;</div><div class="line">  ...</div><div class="line">  ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">      (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">  OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">  <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看明白这里需要具备一点Java反射的知识，如果不太明白还请自行百度。简言之，就是<font color="#ff3131">根据反射获取到GitHubService所声明方法的注解、参数及类型、返回值类型，构造了一个HTTP任务：OkHttpCall</font>。下面是详细讲解，先来看下loadServiceMethod方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//仅展示相关代码</span></div><div class="line"><span class="comment">//Retrofit.java</span></div><div class="line">ServiceMethod&lt;?, ?&gt; loadServiceMethod(Method method) &#123;</div><div class="line">  <span class="comment">// 先在缓存中查找method对应的ServiceMethod</span></div><div class="line">  ServiceMethod&lt;?, ?&gt; result = serviceMethodCache.get(method);</div><div class="line">  <span class="comment">// 已经在缓存中了，直接返回</span></div><div class="line">  <span class="keyword">if</span> (result != <span class="keyword">null</span>) <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">  <span class="keyword">synchronized</span> (serviceMethodCache) &#123;</div><div class="line">    result = serviceMethodCache.get(method);</div><div class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="comment">// 没有在当前的缓存中，以method为参数创建一个ServiceMethod，并放入缓存中</span></div><div class="line">      result = <span class="keyword">new</span> ServiceMethod.Builder&lt;&gt;(<span class="keyword">this</span>, method).build();</div><div class="line">      serviceMethodCache.put(method, result);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"><span class="comment">// ServiceMethod.java</span></div><div class="line"><span class="comment">//建造器模式，把复杂对象的构建独立出来</span></div><div class="line">Builder(Retrofit retrofit, Method method) &#123;</div><div class="line">  <span class="keyword">this</span>.retrofit = retrofit;</div><div class="line">  <span class="keyword">this</span>.method = method;</div><div class="line">  <span class="keyword">this</span>.methodAnnotations = method.getAnnotations();</div><div class="line">  <span class="keyword">this</span>.parameterTypes = method.getGenericParameterTypes();</div><div class="line">  <span class="keyword">this</span>.parameterAnnotationsArray = method.getParameterAnnotations();</div><div class="line">&#125;</div><div class="line"><span class="comment">//开始构建</span></div><div class="line"><span class="function"><span class="keyword">public</span> ServiceMethod <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">/* 生成调用适配器，这里之所以采用适配器模式，是因为Retrofit的Http框架(默认是OKHttp)也是可配的</span></div><div class="line">  */</div><div class="line">  callAdapter = createCallAdapter();</div><div class="line">  <span class="comment">//解析返回值类型</span></div><div class="line">  responseType = callAdapter.responseType();</div><div class="line">  ...</div><div class="line">  <span class="comment">// 用以解析返回数据</span></div><div class="line">  responseConverter = createResponseConverter();</div><div class="line">  <span class="comment">// 解析method的注解，注解里面封装了API信息</span></div><div class="line">  <span class="keyword">for</span> (Annotation annotation : methodAnnotations) &#123;</div><div class="line">    parseMethodAnnotation(annotation);</div><div class="line">  &#125;</div><div class="line">  ...</div><div class="line">  <span class="keyword">int</span> parameterCount = parameterAnnotationsArray.length;</div><div class="line">  parameterHandlers = <span class="keyword">new</span> ParameterHandler&lt;?&gt;[parameterCount];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">0</span>; p &lt; parameterCount; p++) &#123;</div><div class="line">    Type parameterType = parameterTypes[p];</div><div class="line">    ...</div><div class="line">    Annotation[] parameterAnnotations = parameterAnnotationsArray[p];</div><div class="line">    ...</div><div class="line">    <span class="comment">//解析入参</span></div><div class="line">    parameterHandlers[p] = parseParameter(p, parameterType, parameterAnnotations);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//构造ServiceMethod</span></div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ServiceMethod&lt;&gt;(<span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// builder已经准备好了所有需要的信息，ServiceMethod坐享其成</span></div><div class="line">ServiceMethod(Builder&lt;R, T&gt; builder) &#123;</div><div class="line">    <span class="keyword">this</span>.callFactory = builder.retrofit.callFactory();</div><div class="line">    <span class="keyword">this</span>.callAdapter = builder.callAdapter;</div><div class="line">    <span class="keyword">this</span>.baseUrl = builder.retrofit.baseUrl();</div><div class="line">    <span class="keyword">this</span>.responseConverter = builder.responseConverter;</div><div class="line">    <span class="keyword">this</span>.httpMethod = builder.httpMethod;</div><div class="line">    <span class="keyword">this</span>.relativeUrl = builder.relativeUrl;</div><div class="line">    <span class="keyword">this</span>.headers = builder.headers;</div><div class="line">    <span class="keyword">this</span>.contentType = builder.contentType;</div><div class="line">    <span class="keyword">this</span>.hasBody = builder.hasBody;</div><div class="line">    <span class="keyword">this</span>.isFormEncoded = builder.isFormEncoded;</div><div class="line">    <span class="keyword">this</span>.isMultipart = builder.isMultipart;</div><div class="line">    <span class="keyword">this</span>.parameterHandlers = builder.parameterHandlers;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以看到loadServiceMethod方法做了很多工作：提取请求方法POST/GET、提取请求的API、提取请求参数、提取返回参数类型、准备数据解析器。一个HTTP请求所需要的要素都已经具备了。</p>
+<p>继续看OkHttpCall的构造方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpCall(ServiceMethod&lt;T, ?&gt; serviceMethod, Object[] args) &#123;</div><div class="line">  <span class="comment">/*持有ServiceMethod，从这里看ServiceMethod更像是数据单元，封装了网络请求的具体参数;而OkHttpCall则封装了HTTP任务*/</span></div><div class="line">  <span class="keyword">this</span>.serviceMethod = serviceMethod;</div><div class="line">  <span class="keyword">this</span>.args = args;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>继续看serviceMethod.callAdapter.adapt(okHttpCall)，之前loadServiceMethod执行时，已经创建了callAdapter。样例中的callAdapter就是Retrofit默认的，如果你在初始化Retrofit是配置了CallAdapter.Factory，那么Retrofit就会调用你所配置的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultCallAdapterFactory</span> <span class="keyword">extends</span> <span class="title">CallAdapter</span>.<span class="title">Factory</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">final</span> CallAdapter.Factory INSTANCE = <span class="keyword">new</span> DefaultCallAdapterFactory();</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> CallAdapter&lt;?, ?&gt; get(Type returnType, Annotation[] annotations, Retrofit retrofit) &#123;</div><div class="line">    <span class="keyword">if</span> (getRawType(returnType) != Call.class) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> Type responseType = Utils.getCallResponseType(returnType);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CallAdapter&lt;Object, Call&lt;?&gt;&gt;() &#123;</div><div class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Type <span class="title">responseType</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> responseType;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Call&lt;Object&gt; <span class="title">adapt</span><span class="params">(Call&lt;Object&gt; call)</span> </span>&#123;</div><div class="line">        <span class="comment">// 使用DefaultCallAdapterFactory仅仅是把OkHttpCall转发出去</span></div><div class="line">        <span class="keyword">return</span> call;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>综上分析，InvocationHandler.invoke方法根据所调用接口方法的注解、返回值类型、参数类型及参数构造了一个HTTP任务，即OkHttpCall。</p>
+<p>然后再回到最初调用repos.execute，其实就是对OkHttpCall.execute的调用了，这里比较简单，不再展开讲了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Retrofit详解/" data-id="cj0sd1w0l00029ejh0grvxv3s" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/27/Android应用内部数据同步/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Android应用内数据同步
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/27/ImageView中Bitmap的回收/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">ImageView中Bitmap的回收</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

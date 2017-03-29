@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RecyclerView֮之IllegalStateException | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用场景：ListView，List data，Adapter。出现场景：refresh() {data.clear();point1;operate(); // 耗时操作，给data.add()数据point2;adapter.notifyDataSetChange();}
+用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起
+java.lang.I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecyclerView֮之IllegalStateException">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用场景：ListView，List data，Adapter。出现场景：refresh() {data.clear();point1;operate(); // 耗时操作，给data.add()数据point2;adapter.notifyDataSetChange();}
+用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起
+java.lang.I">
+<meta property="og:updated_time" content="2017-03-28T16:24:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RecyclerView֮之IllegalStateException">
+<meta name="twitter:description" content="使用场景：ListView，List data，Adapter。出现场景：refresh() {data.clear();point1;operate(); // 耗时操作，给data.add()数据point2;adapter.notifyDataSetChange();}
+用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起
+java.lang.I">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-RecyclerView֮IllegalStateException" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/RecyclerView֮IllegalStateException/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RecyclerView֮之IllegalStateException
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用场景：ListView，List data，Adapter。<br>出现场景：<br>refresh() {<br>data.clear();<br>point1;<br>operate(); // 耗时操作，给data.add()数据<br>point2;<br>adapter.notifyDataSetChange();<br>}</p>
+<p>用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起</p>
+<p>java.lang.IllegalStateException<br>The content of the adapter has changed but ListView did not receive a notification. Make sure the content of your adapter is not modified from a background thread, but only from the UI thread. Make sure your adapter calls notifyDataSetChanged() when its content changes.</p>
+<p>这个问题的根本是listView重新布局或者绘制新item的时候会调用getItemCount(),如果这个时候获取的数据和之前缓存的count不一致就会导致这个问题。解决这个问题也很简单，不要再另一个线程去修改会导致getItemCount()变化的内容。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/" data-id="cj0tr4o7n0002qkjhffkpbw8f" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/27/后台应用被系统回收后重启/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          后台应用被系统回收后重启
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/27/如何调试多文件上传/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">如何调试多文件上传</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

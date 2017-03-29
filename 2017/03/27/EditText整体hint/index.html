@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>EditText整体hint | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="研究b站app的时候发现了一个之前没有见过的效果，于是研究了一下。下面是b站的效果：
+在上面这个过程中，我发现：
+1.输入框中包含了两个部分的内容，前面带背景的部分A和后面正常输入的部分B；
+2.点击删除的时候，正常输入的部分B也是被正常删除的，但是带背景的部分A则是被作为整体删除的。
+奈何小生我学习不认真，竟然没有看懂这当中的门道，一度以为这个效果特别高端，还怀疑是通过自定义控件实现的。但是当我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EditText整体hint">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/EditText整体hint/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="研究b站app的时候发现了一个之前没有见过的效果，于是研究了一下。下面是b站的效果：
+在上面这个过程中，我发现：
+1.输入框中包含了两个部分的内容，前面带背景的部分A和后面正常输入的部分B；
+2.点击删除的时候，正常输入的部分B也是被正常删除的，但是带背景的部分A则是被作为整体删除的。
+奈何小生我学习不认真，竟然没有看懂这当中的门道，一度以为这个效果特别高端，还怀疑是通过自定义控件实现的。但是当我">
+<meta property="og:image" content="http://yoursite.com/../assets/hint1.gif">
+<meta property="og:image" content="http://yoursite.com/../assets/hint2.gif">
+<meta property="og:updated_time" content="2017-03-28T16:54:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EditText整体hint">
+<meta name="twitter:description" content="研究b站app的时候发现了一个之前没有见过的效果，于是研究了一下。下面是b站的效果：
+在上面这个过程中，我发现：
+1.输入框中包含了两个部分的内容，前面带背景的部分A和后面正常输入的部分B；
+2.点击删除的时候，正常输入的部分B也是被正常删除的，但是带背景的部分A则是被作为整体删除的。
+奈何小生我学习不认真，竟然没有看懂这当中的门道，一度以为这个效果特别高端，还怀疑是通过自定义控件实现的。但是当我">
+<meta name="twitter:image" content="http://yoursite.com/../assets/hint1.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-EditText整体hint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/EditText整体hint/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      EditText整体hint
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>研究b站app的时候发现了一个之前没有见过的效果，于是研究了一下。下面是b站的效果：<br><img src="../assets/hint1.gif" width="360/"></p>
+<p>在上面这个过程中，我发现：</p>
+<p>1.输入框中包含了两个部分的内容，前面带背景的部分A和后面正常输入的部分B；</p>
+<p>2.点击删除的时候，正常输入的部分B也是被正常删除的，但是带背景的部分A则是被作为整体删除的。</p>
+<p>奈何小生我学习不认真，竟然没有看懂这当中的门道，一度以为这个效果特别高端，还怀疑是通过自定义控件实现的。但是当我查看了EditText&amp;TextView的源码，我肯定他们没有自定义控件（这么复杂的逻辑，他们做不来！）。一定是我忽略了什么东西！</p>
+<p>一边看源码，一边问同事，终于让我发现了真相！</p>
+<p>如果你抢答“BackgroundColorSpan”，我只能很遗憾的告诉你“回答错误”。少侠，拳头放下，有话咱们好好说。这个地方确实使用了Span，但并不是BackgroundColorSpan，而是ImageSpan。客官，你先喝口热翔，容我跟你分说端详。</p>
+<p>第一个问题，为什么BackgroundColorSpan不能胜任？用BackgroundColorSpan能够实现第一特征，为部分文字添加背景，但仅仅是添加背景。这些文字还是各自独立的，不会被当作一个整体来处理，也就是说第二个特征不满足，点击删除的时候还会逐字删除。还有一个不能忍的地方，光标会定位到前半部分的中间。第二个问题，为什么ImageSpan可以？想到了罗老师的一句话，彪悍的人生不需要解释！为什么可以，就是因为我能干！戴好墨镜，我要上图了（你们不要邪恶好不好）。</p>
+<p><img src="../assets/hint2.gif" width="360/"></p>
+<p>前面是在windows上做的，后面是在mac上做的（我是不是高端黑？是ps软件版本的问题，不是我大苹果的问题）。</p>
+<p>咱们接着鬼扯，提到ImageSpan我们首先想到的是，在文字边上加图片。但这个地方，我们直观的感觉是，这个地方是文本呀！不是图片呀！！！我们换一个角度来考虑这个问题，我们觉得不对劲只是因为跟我们的习惯或者感觉冲突了，我们的习惯和感觉就是对的嘛？我们站在用户的角度来想，我看到了这些内容，我并不关心你放的是文本还是图片。so——这根本就不是个问题！不要怂，就是干！再点击删除键的时候，ImageSpan只相当于一个字符，图片被删除了上面的文字自然全部消失了！第二个特征满足！至于第一个特征，我相信，聪慧如你，自然不是问题！</p>
+<p>完结，撒花！</p>
+<p>参考文章：</p>
+<ul>
+<li><a href="http://blog.sina.com.cn/s/blog_618199e60101rfw5.html" target="_blank" rel="external">《Android textView 添加超链接(三种实现方式）》</a></li>
+<li><a href="http://hunankeda110.iteye.com/blog/1420470" target="_blank" rel="external">《android中的spannable的使用》</a></li>
+<li><a href="http://www.cnblogs.com/nokiaguy/archive/2011/10/06/2199775.html" target="_blank" rel="external">《Android开发技巧：像QQ一样输入表情图像》</a></li>
+<li><a href="http://blog.csdn.net/djcken/article/details/41898523" target="_blank" rel="external">《关于Android使用TextView+ImageSpan同一行文字图片居中的问题》</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/EditText整体hint/" data-id="cj0trwkxs0006qkjhcf2ms3bc" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/27/android图文混排/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Android图文混排
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/27/Java异常处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Java异常处理的一个例子</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

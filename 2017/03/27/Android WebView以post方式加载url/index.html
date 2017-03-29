@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android WebView以POST方式加载URL | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一般情况下，调用WebView.loadUrl(url)方法即可加载需要展示的Html页面了，如果需要传参数的话，我们也可以把参数拼在url后面(像这样http://www.baidu.com/s?word=WebView)，一并传给服务端。但有时候情况比较特殊，比方说，请求页面的时候我们还想通过post方式传一些参数过去，这个时候直接调用上述方法就不行了。这个时候该怎么办呢？
+这里讲一个开发中的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android WebView以POST方式加载URL">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/Android WebView以post方式加载url/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一般情况下，调用WebView.loadUrl(url)方法即可加载需要展示的Html页面了，如果需要传参数的话，我们也可以把参数拼在url后面(像这样http://www.baidu.com/s?word=WebView)，一并传给服务端。但有时候情况比较特殊，比方说，请求页面的时候我们还想通过post方式传一些参数过去，这个时候直接调用上述方法就不行了。这个时候该怎么办呢？
+这里讲一个开发中的">
+<meta property="og:image" content="http://yoursite.com/assets/webview_posturl.png">
+<meta property="og:updated_time" content="2017-03-28T16:10:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android WebView以POST方式加载URL">
+<meta name="twitter:description" content="一般情况下，调用WebView.loadUrl(url)方法即可加载需要展示的Html页面了，如果需要传参数的话，我们也可以把参数拼在url后面(像这样http://www.baidu.com/s?word=WebView)，一并传给服务端。但有时候情况比较特殊，比方说，请求页面的时候我们还想通过post方式传一些参数过去，这个时候直接调用上述方法就不行了。这个时候该怎么办呢？
+这里讲一个开发中的">
+<meta name="twitter:image" content="http://yoursite.com/assets/webview_posturl.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android WebView以post方式加载url" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Android WebView以post方式加载url/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android WebView以POST方式加载URL
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一般情况下，调用WebView.loadUrl(url)方法即可加载需要展示的Html页面了，如果需要传参数的话，我们也可以把参数拼在url后面(像这样<a href="http://www.baidu.com/s?word=WebView" target="_blank" rel="external">http://www.baidu.com/s?word=WebView</a>)，一并传给服务端。但有时候情况比较特殊，比方说，请求页面的时候我们还想通过post方式传一些参数过去，这个时候直接调用上述方法就不行了。这个时候该怎么办呢？</p>
+<p>这里讲一个开发中的小技巧，当你面对一个功能一筹莫展的时候，不妨过一遍相关类的API，看到名字跟你目标有点相关性的就点进去看看，没准有现成的API实现呢！</p>
+<p>这里看一下WebView的API：<br><img src="assets/webview_posturl.png"><br>看到了一个方法叫postUrl(url,postData),看方法名跟我们的目标比较接近，再看一参数，url+postData不就是地址+数据吗？看到这里已经七七八八了，应该就是这货。然后我们点进去，看一下方法的介绍。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//android.webkit.WebView.class</span></div><div class="line"><span class="comment">/**</span></div><div class="line">  * Loads the URL with postData using "POST" method into this WebView. If url</div><div class="line">  * 通过POST方法加载URL，并携带postData</div><div class="line">  * is not a network URL, it will be loaded with &#123;<span class="doctag">@link</span> #loadUrl(String)&#125;</div><div class="line">  * instead, ignoring the postData param.</div><div class="line">  *</div><div class="line">  * <span class="doctag">@param</span> url the URL of the resource to load</div><div class="line">  * <span class="doctag">@param</span> postData the data will be passed to "POST" request, which must be</div><div class="line">  * "application/x-www-form-urlencoded" encoded.</div><div class="line">  * 通过POST传递的数据必须先使用"application/x-www-form-urlencoded"编码</div><div class="line">  */</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postUrl</span><span class="params">(String url, <span class="keyword">byte</span>[] postData)</span> </span>&#123;</div><div class="line">     checkThread();</div><div class="line">     <span class="keyword">if</span> (URLUtil.isNetworkUrl(url)) &#123;</div><div class="line">         mProvider.postUrl(url, postData);</div><div class="line">     &#125; <span class="keyword">else</span> &#123;</div><div class="line">         mProvider.loadUrl(url);</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>看到这里就可以确认，确实是这货。下面我们就看一下怎么使用这个方法。</p>
+<p>第一个参数URL没有问题，就是我们要请求的地址；第二个参数postData是要传递的数据，有点麻烦。方法注释（少年一定要好好看注释呀）里面给了我们提示：传递的数据必须先使用”application/x-www-form-urlencoded”编码。然后我们就看看application/x-www-form-urlencoded编码应该长成什么样子。</p>
+<p>编码前数据是这个样子：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nickName=Micheal Jack&amp;name=张全蛋</div></pre></td></tr></table></figure></p>
+<p>编码后数据变成了酱紫：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nickName=Micheal+Jack&amp;name=%E5%BC%A0%E5%85%A8%E8%9B%8B</div></pre></td></tr></table></figure></p>
+<p>你一定在吐槽了：who care！快把你的代码交出来，你就可以去领盒饭了！</p>
+<p>ok，下面就献上我的代码，大家慢用。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by travis on 2017/3/9.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        User user = <span class="keyword">new</span> User();</div><div class="line">        user.name = <span class="string">"张全蛋"</span>;</div><div class="line">        user.nickName=<span class="string">"Micheal Jack"</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            System.out.print(concatParams(getAllFields(user)));</div><div class="line">        &#125;<span class="keyword">catch</span> (UnsupportedEncodingException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Map&lt;String,String&gt; <span class="title">getAllFields</span><span class="params">(T t)</span></span>&#123;</div><div class="line">        Field[] field = t.getClass().getDeclaredFields();</div><div class="line">        Map&lt;String,String&gt; fieldsAndValues = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; field.length; i++) &#123;</div><div class="line">                String name = field[i].getName();</div><div class="line">                <span class="keyword">if</span>(field[i].getGenericType().toString().equals(<span class="string">"class java.lang.String"</span>))&#123;</div><div class="line">                    String value = (String) field[i].get(t);</div><div class="line">                    fieldsAndValues.put(name,value);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (SecurityException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.print(<span class="string">""</span>+fieldsAndValues.size());</div><div class="line">        <span class="keyword">return</span> fieldsAndValues;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">concatParams</span><span class="params">(Map&lt;String,String&gt; params)</span> <span class="keyword">throws</span> UnsupportedEncodingException </span>&#123;</div><div class="line">        <span class="keyword">if</span>(params.size() ==<span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</div><div class="line">        Set&lt;String&gt; keys = params.keySet();</div><div class="line">        Iterator&lt;String&gt; iterator = keys.iterator();</div><div class="line">        <span class="keyword">while</span> (iterator.hasNext())&#123;</div><div class="line">            String key = iterator.next();</div><div class="line">            String value = URLEncoder.encode(params.get(key), <span class="string">"UTF-8"</span>);</div><div class="line">            builder.append(String.format(<span class="string">"%s=%s&amp;"</span>,key, value));</div><div class="line">        &#125;</div><div class="line">        builder.deleteCharAt(builder.lastIndexOf(<span class="string">"&amp;"</span>));</div><div class="line">        <span class="keyword">return</span> builder.toString();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</div><div class="line">        String name;</div><div class="line">        String nickName;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这么简单的东西也被我写了这么长，我真是越来越厉害了！(•̀ᴗ•́)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Android WebView以post方式加载url/" data-id="cj0tqm2ec0008m7jhzavqxkl8" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/27/状态栏背景图片可滑动/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          状态栏背景图片可滑动
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/27/这个字段到底有没有返回/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">这个字段到底有没有返回</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

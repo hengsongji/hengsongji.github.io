@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java异常处理的一个例子 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文记录了Java异常处理情况的一个例子：
+12345678910111213private void testException()&amp;#123;    try    &amp;#123;        //throw new Exception();        return;    &amp;#125; catch (Exception e)    &amp;#123;        Log.d(TAG, &quot;cat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常处理的一个例子">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/Java异常处理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文记录了Java异常处理情况的一个例子：
+12345678910111213private void testException()&amp;#123;    try    &amp;#123;        //throw new Exception();        return;    &amp;#125; catch (Exception e)    &amp;#123;        Log.d(TAG, &quot;cat">
+<meta property="og:updated_time" content="2017-03-28T17:11:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java异常处理的一个例子">
+<meta name="twitter:description" content="本文记录了Java异常处理情况的一个例子：
+12345678910111213private void testException()&amp;#123;    try    &amp;#123;        //throw new Exception();        return;    &amp;#125; catch (Exception e)    &amp;#123;        Log.d(TAG, &quot;cat">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java异常处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Java异常处理/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java异常处理的一个例子
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文记录了Java异常处理情况的一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testException</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">try</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//throw new Exception();</span></div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e)</div><div class="line">    &#123;</div><div class="line">        Log.d(TAG, <span class="string">"catch"</span>);</div><div class="line">    &#125; <span class="keyword">finally</span></div><div class="line">    &#123;</div><div class="line">        Log.d(TAG, <span class="string">"finally"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>case1：</p>
+<p>try代码：throw new Exception();<br><br>打印语句：“catch”  “finally”</p>
+</li>
+<li><p>case2:</p>
+<p>try  代码： 空<br><br>打印语句： “finally”<br><br>结      论： try代码正常结束，finally语句块被调用</p>
+</li>
+<li><p>case3:</p>
+<p>try  代码： return;<br><br>打印语句：“finally”<br><br>结      论： try代码return，finally语句块被调用</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Java异常处理/" data-id="cj0tsm1w10007qkjhd5p9j3ea" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/27/EditText整体hint/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          EditText整体hint
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/27/App多渠道打包/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">App多渠道打包</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

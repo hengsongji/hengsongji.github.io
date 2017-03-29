@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>自定义圆角图片控件(Xfermode方式) | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="苹果都放弃自己的棱角了。。。
+看惯了方方正正的图片，乍一看到圆角图片觉得挺漂亮的。可当满世界都是圆角图片的时候，我又开始怀念那些棱角了~之前仓促的写过一个，今天拿过来又修改了一下，现在贴在这里，以方便以后ctrl+c、ctrl+v~
+目标自定义一个图片控件，有圆形和圆角两种选择。控件的行为和ImageView一致！
+思路扩展ImageView控件，重写其onDraw方法。一开始还想重写onMeas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义圆角图片控件(Xfermode方式)">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/自定义圆角图片控件<Xfermode方式>/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="苹果都放弃自己的棱角了。。。
+看惯了方方正正的图片，乍一看到圆角图片觉得挺漂亮的。可当满世界都是圆角图片的时候，我又开始怀念那些棱角了~之前仓促的写过一个，今天拿过来又修改了一下，现在贴在这里，以方便以后ctrl+c、ctrl+v~
+目标自定义一个图片控件，有圆形和圆角两种选择。控件的行为和ImageView一致！
+思路扩展ImageView控件，重写其onDraw方法。一开始还想重写onMeas">
+<meta property="og:image" content="http://yoursite.com/../assets/round.png">
+<meta property="og:updated_time" content="2017-03-28T17:29:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义圆角图片控件(Xfermode方式)">
+<meta name="twitter:description" content="苹果都放弃自己的棱角了。。。
+看惯了方方正正的图片，乍一看到圆角图片觉得挺漂亮的。可当满世界都是圆角图片的时候，我又开始怀念那些棱角了~之前仓促的写过一个，今天拿过来又修改了一下，现在贴在这里，以方便以后ctrl+c、ctrl+v~
+目标自定义一个图片控件，有圆形和圆角两种选择。控件的行为和ImageView一致！
+思路扩展ImageView控件，重写其onDraw方法。一开始还想重写onMeas">
+<meta name="twitter:image" content="http://yoursite.com/../assets/round.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-自定义圆角图片控件&lt;Xfermode方式&gt;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自定义圆角图片控件(Xfermode方式)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>苹果都放弃自己的棱角了。。。</p>
+<p>看惯了方方正正的图片，乍一看到圆角图片觉得挺漂亮的。可当满世界都是圆角图片的时候，我又开始怀念那些棱角了~之前仓促的写过一个，今天拿过来又修改了一下，现在贴在这里，以方便以后ctrl+c、ctrl+v<del>~</del></p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>自定义一个图片控件，有圆形和圆角两种选择。控件的行为和ImageView一致！</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>扩展ImageView控件，重写其onDraw方法。一开始还想重写onMeasure方法，如果显示圆形图片强制宽高相等，没能行得通（代码中会说明）。圆角图片以Xfermode方式实现，关于这个知识点大家可以参考这篇文章《setXfermode属性》。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>控件类RoundImageView：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 圆角或者圆形图片控件扩展自ImageView&lt;br/&gt;</div><div class="line"> * 说明：&lt;br/&gt;</div><div class="line"> * 1.仅重写了绘制流程，即onDraw()方法&lt;br/&gt;</div><div class="line"> * 2.如果使用圆形图片需要设置固定的尺寸</div><div class="line"> * 3.支持普通、圆形、圆角三种样式</div><div class="line"> * 4.可设置圆角半径  默认是10dp</div><div class="line"> * 5.无法为背景添加圆角</div><div class="line"> * Created by 95 on 2016/1/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundImageView</span> <span class="keyword">extends</span> <span class="title">ImageView</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = RoundImageView.class.getSimpleName();</div><div class="line">    <span class="keyword">private</span> Paint mPaint;</div><div class="line">    <span class="keyword">private</span> WeakReference&lt;Bitmap&gt; mWeakBitmap;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 图片的类型，圆形or圆角</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> type;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_NORMAL = <span class="number">0</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_CIRCLE = <span class="number">1</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_ROUND = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 圆角大小的默认值</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_RADIUS = <span class="number">10</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 圆角的大小</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mRadius;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundImageView</span><span class="params">(Context context)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundImageView</span><span class="params">(Context context, AttributeSet attrs)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line"></div><div class="line">        mPaint = <span class="keyword">new</span> Paint();</div><div class="line">        mPaint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView);</div><div class="line"></div><div class="line">        mRadius = a.getDimensionPixelSize(R.styleable.RoundImageView_radius, (<span class="keyword">int</span>) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_RADIUS, getResources().getDisplayMetrics()));<span class="comment">// 默认为10dp</span></div><div class="line">        type = a.getInt(R.styleable.RoundImageView_type, TYPE_NORMAL);<span class="comment">// 默认为normal</span></div><div class="line">        a.recycle();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 如果类型是圆形，则强制改变view的宽高一致，以小值为准</div><div class="line">         * 这种写法是有问题的</div><div class="line">         * 我们本来是想在正常测量的基础上取最短边</div><div class="line">         * 可下面的操作插入到了正常执行的流程当中   致使最终的结果出了问题</div><div class="line">         */</div><div class="line">        <span class="comment">//        if (type == TYPE_CIRCLE)</span></div><div class="line">        <span class="comment">//        &#123;</span></div><div class="line">        <span class="comment">//            int min = Math.min(getMeasuredWidth(), getMeasuredHeight());</span></div><div class="line">        <span class="comment">//            setMeasuredDimension(min, min);</span></div><div class="line">        <span class="comment">//        &#125;</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//普通模式  调用原生的绘制方法</span></div><div class="line">        <span class="keyword">if</span> (type == TYPE_NORMAL)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果当前未设置图片  直接返回</span></div><div class="line">        <span class="keyword">if</span> (getDrawable() == <span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        <span class="comment">//在缓存中取出bitmap</span></div><div class="line">        Bitmap bitmap = mWeakBitmap == <span class="keyword">null</span> ? <span class="keyword">null</span> : mWeakBitmap.get();</div><div class="line">        <span class="comment">//如果bitmap已经被回收，就重新创建</span></div><div class="line">        <span class="keyword">if</span> (bitmap == <span class="keyword">null</span> || bitmap.isRecycled())</div><div class="line">        &#123;</div><div class="line">            bitmap = createDesiredBitmap(drawableToBitmap(getDrawable()), type, getMeasuredWidth(), getMeasuredHeight(), mRadius);</div><div class="line">            mWeakBitmap = <span class="keyword">new</span> WeakReference&lt;Bitmap&gt;(bitmap);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//以为我们所有的绘制使用了同一个Paint  所以每次使用之前都要考虑这个状态</span></div><div class="line">        mPaint.setXfermode(<span class="keyword">null</span>);</div><div class="line">        <span class="comment">//把最终结果绘制到画布上</span></div><div class="line">        canvas.drawBitmap(bitmap, <span class="number">0.0f</span>, <span class="number">0.0f</span>, mPaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 生成圆角图片 使用Xfermode方式</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> src           原图</div><div class="line">     * <span class="doctag">@param</span> type          round or circle</div><div class="line">     * <span class="doctag">@param</span> desiredWidth  控件的宽</div><div class="line">     * <span class="doctag">@param</span> desiredHeight 控件的高</div><div class="line">     * <span class="doctag">@param</span> radius        圆角半径</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">createDesiredBitmap</span><span class="params">(Bitmap src, <span class="keyword">int</span> type, <span class="keyword">int</span> desiredWidth, <span class="keyword">int</span> desiredHeight, <span class="keyword">int</span> radius)</span></span></div><div class="line">    &#123;</div><div class="line">        Bitmap target = Bitmap.createBitmap(desiredWidth, desiredHeight, Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(target);</div><div class="line">        mPaint.setXfermode(<span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (TYPE_CIRCLE == type)</div><div class="line">        &#123;</div><div class="line">            canvas.drawCircle(desiredWidth * <span class="number">1.0f</span> / <span class="number">2</span>, desiredWidth * <span class="number">1.0f</span> / <span class="number">2</span>, desiredWidth * <span class="number">1.0f</span> / <span class="number">2</span>, mPaint);</div><div class="line">        &#125; <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            RectF rectF = <span class="keyword">new</span> RectF(<span class="number">0.0f</span>, <span class="number">0.0f</span>, desiredWidth, desiredHeight);</div><div class="line">            canvas.drawRoundRect(rectF, radius * <span class="number">1.0f</span>, radius * <span class="number">1.0f</span>, mPaint);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//缩放比例  保证图片的宽和高大于控件的宽和高</span></div><div class="line">        <span class="keyword">float</span> ratio = Math.max(desiredWidth * <span class="number">1.0f</span> / src.getWidth(), desiredHeight * <span class="number">1.0f</span> / src.getHeight());</div><div class="line">        Bitmap tem = getScaledBitmap(src, ratio);</div><div class="line">        <span class="comment">//设置Xfermode</span></div><div class="line">        mPaint.setXfermode(<span class="keyword">new</span> PorterDuffXfermode(PorterDuff.Mode.SRC_IN));</div><div class="line">        <span class="comment">//保证控件展示的位置即为图片正中间的内容</span></div><div class="line">        canvas.drawBitmap(tem, (desiredWidth - tem.getWidth()) * <span class="number">1.0f</span> / <span class="number">2</span>, (desiredHeight - tem.getHeight()) * <span class="number">1.0f</span> / <span class="number">2</span>, mPaint);</div><div class="line">        <span class="comment">//释放内存</span></div><div class="line">        tem.recycle();</div><div class="line">        <span class="keyword">return</span> target;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 缩放图片</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> src   原图</div><div class="line">     * <span class="doctag">@param</span> ratio 缩放比例</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">getScaledBitmap</span><span class="params">(Bitmap src, <span class="keyword">float</span> ratio)</span></span></div><div class="line">    &#123;</div><div class="line">        Matrix matrix = <span class="keyword">new</span> Matrix();</div><div class="line">        matrix.setScale(ratio, ratio, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</div><div class="line">        Bitmap target = Bitmap.createBitmap((<span class="keyword">int</span>) (src.getWidth() * ratio), (<span class="keyword">int</span>) (src.getHeight() * ratio), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(target);</div><div class="line">        canvas.drawBitmap(src, matrix, mPaint);</div><div class="line">        <span class="keyword">return</span> target;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * drawable 转 bitmap</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> drawable</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">drawableToBitmap</span><span class="params">(Drawable drawable)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (drawable <span class="keyword">instanceof</span> BitmapDrawable)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> ((BitmapDrawable) drawable).getBitmap();</div><div class="line">        &#125;</div><div class="line">        Bitmap target = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(target);</div><div class="line">        drawable.setBounds(<span class="number">0</span>, <span class="number">0</span>, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());</div><div class="line">        drawable.draw(canvas);</div><div class="line">        <span class="keyword">return</span> target;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自定义属性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"RoundImageView"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"type"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"normal"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"circle"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"round"</span> <span class="attr">value</span>=<span class="string">"2"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">attr</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"radius"</span> <span class="attr">format</span>=<span class="string">"dimension"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>直接在布局文件当中使用：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:gravity</span>=<span class="string">"center_horizontal"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--原图--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--圆角效果，圆角半径是15dp--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"80dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"80dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span></div><div class="line">        <span class="attr">app:radius</span>=<span class="string">"15dp"</span></div><div class="line">        <span class="attr">app:type</span>=<span class="string">"round"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--非正方形圆角效果，圆角半径60dp--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"120dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"80dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span></div><div class="line">        <span class="attr">app:radius</span>=<span class="string">"60dp"</span></div><div class="line">        <span class="attr">app:type</span>=<span class="string">"round"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--圆形效果--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"120dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"120dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span></div><div class="line">        <span class="attr">app:type</span>=<span class="string">"circle"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>下面是效果图：<br><br><img src="../assets/round.png" width="300/"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/自定义圆角图片控件<Xfermode方式>/" data-id="cj0tsy9rn0009qkjhvwgoonur" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/28/PhotoView使用过程中遇到的坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          PhotoView使用过程中的坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/27/Android如何完全退出程序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Android如何完全退出程序</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

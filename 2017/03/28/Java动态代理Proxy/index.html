@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java动态代理Proxy | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上网查一下Java Proxy几乎都是一样的东西：
+
+实体类实现接口；
+根据接口生成代理类；
+代理类再调用实体类。
+
+1234567891011121314151617181920212223242526272829303132333435public class ProxyDemo &amp;#123;    public interface IProducer&amp;#123;        void pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java动态代理Proxy">
+<meta property="og:url" content="http://yoursite.com/2017/03/28/Java动态代理Proxy/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上网查一下Java Proxy几乎都是一样的东西：
+
+实体类实现接口；
+根据接口生成代理类；
+代理类再调用实体类。
+
+1234567891011121314151617181920212223242526272829303132333435public class ProxyDemo &amp;#123;    public interface IProducer&amp;#123;        void pr">
+<meta property="og:updated_time" content="2017-03-28T14:25:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java动态代理Proxy">
+<meta name="twitter:description" content="上网查一下Java Proxy几乎都是一样的东西：
+
+实体类实现接口；
+根据接口生成代理类；
+代理类再调用实体类。
+
+1234567891011121314151617181920212223242526272829303132333435public class ProxyDemo &amp;#123;    public interface IProducer&amp;#123;        void pr">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java动态代理Proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/28/Java动态代理Proxy/" class="article-date">
+  <time datetime="2017-03-27T18:47:00.000Z" itemprop="datePublished">2017-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java动态代理Proxy
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上网查一下Java Proxy几乎都是一样的东西：</p>
+<ol>
+<li>实体类实现接口；</li>
+<li>根据接口生成代理类；</li>
+<li>代理类再调用实体类。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IProducer</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">produce</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteProducer</span> <span class="keyword">implements</span> <span class="title">IProducer</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">produce</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"producing happiness"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> InvocationHandler handler;</div><div class="line">    <span class="keyword">private</span> ConcreteProducer producer;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyDemo</span><span class="params">()</span></span>&#123;</div><div class="line">        producer = <span class="keyword">new</span> ConcreteProducer();</div><div class="line">        handler = <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">                <span class="comment">//我们来做一些羞羞的事情吧。。。</span></div><div class="line">                <span class="keyword">return</span> method.invoke(producer,args);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line">        IProducer producer = (IProducer) Proxy.newProxyInstance(IProducer.class.getClassLoader(),<span class="keyword">new</span> Class[]&#123;IProducer.class&#125;,handler);</div><div class="line">        producer.produce();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> ProxyDemo().execute();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>But，why？为什么要这样处理？套路一定是这样的吗？</p>
+<h2 id="为什么要这样处理？"><a href="#为什么要这样处理？" class="headerlink" title="为什么要这样处理？"></a>为什么要这样处理？</h2><p>Proxy对实体类的调用进行了封装，这样我们就可以在真正调用实体类之前做一些羞羞的事情。比方说安全代理，用来控制真实对象的访问权限；智能引用，调用真实对象之前做另外一些事情。</p>
+<p>代理模式其实就是在访问对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。</p>
+<h2 id="套路一定是这样的吗？"><a href="#套路一定是这样的吗？" class="headerlink" title="套路一定是这样的吗？"></a>套路一定是这样的吗？</h2><p>并不是！</p>
+<p>透过上面的样例我们可以看到:InvocationHandler的invoke方法对修改是开放的，也就是说<font color="#ff3131">invoke方法并不是一定要调用ConcreteProducer的方法</font>！</p>
+<p>可能你还有点懵，没有想到一个合适的应用场景，那么我给你一点提示：反射。对，就是反射，Java Proxy + 反射，我们没必要实现一个实体类，也不必实现接口，就可以完成我们想做的事情了。我们对上面的代码做些修改：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IProducer</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">produce</span><span class="params">(String arg1)</span></span>;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">produce</span><span class="params">(String arg1，String arg2)</span></span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> InvocationHandler handler;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyDemo</span><span class="params">()</span></span>&#123;</div><div class="line">        handler = <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">                StringBuilder builder = <span class="keyword">new</span> StringBuilder();</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt; args.length;i++)&#123;</div><div class="line">                    builder.append((String)args[i]);</div><div class="line">                    builder.append(<span class="string">","</span>);</div><div class="line">                &#125;</div><div class="line">                builder.append(<span class="string">"来呀，快活呀！"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line">        IProducer producer = (IProducer) Proxy.newProxyInstance(IProducer.class.getClassLoader(),<span class="keyword">new</span> Class[]&#123;IProducer.class&#125;,handler);</div><div class="line">        producer.produce(<span class="string">"二狗"</span>);</div><div class="line">        producer.produce(<span class="string">"二狗"</span>,<span class="string">"全蛋"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> ProxyDemo().execute();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码有些拙劣，不过确实是一个思路。增加了程序的反射能够很好的实现解耦，Proxy又能提供一个切面，还是可以做挺多事情的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/28/Java动态代理Proxy/" data-id="cj0sd1w0d00009ejhhhlbyv1m" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/28/PhotoView使用过程中遇到的坑/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">PhotoView使用过程中的坑</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
