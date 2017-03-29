@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Handler的执行时机 | Travis&#39;s Blog</title>
+  <title>Handler的执行时机 | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Handler的执行时机“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。
 我们先来补充一下基础知识:《Android View系统分析之三Activity的启动与显示》《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Handler的执行时机">
 <meta property="og:url" content="http://yoursite.com/2017/03/27/Handler的执行时机/index.html">
-<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:site_name" content="Blog">
 <meta property="og:description" content="Handler的执行时机“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。
 我们先来补充一下基础知识:《Android View系统分析之三Activity的启动与显示》《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI">
 <meta property="og:updated_time" content="2017-03-28T14:30:56.000Z">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="Handler的执行时机“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。
 我们先来补充一下基础知识:《Android View系统分析之三Activity的启动与显示》《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI">
   
-    <link rel="alternate" href="/atom.xml" title="Travis&#39;s Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -40,8 +40,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Travis&#39;s Blog</a>
+        <a href="/" id="logo">Blog</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">blog</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -105,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Handler的执行时机/" data-id="cj0uytlfm0008awjho3rwbb9j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/Handler的执行时机/" data-id="cj0uyxka60008bajh4ap2xuy8" class="article-share-link">Share</a>
       
       
     </footer>

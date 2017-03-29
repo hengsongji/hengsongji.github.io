@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Travis&#39;s Blog</title>
+  <title>Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Travis's Blog">
+<meta property="og:title" content="Blog">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
-<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:site_name" content="Blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Travis's Blog">
+<meta name="twitter:title" content="Blog">
   
-    <link rel="alternate" href="/atom.xml" title="Travis&#39;s Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,8 +33,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Travis&#39;s Blog</a>
+        <a href="/" id="logo">Blog</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">blog</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -100,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Java异常处理/" data-id="cj0uytlfu000cawjhj95wpivn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/Java异常处理/" data-id="cj0uyxkad000cbajh7qz1j121" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,9 +114,9 @@
 
 
   
-    <article id="post-Java多线程之线程同步(wait&amp;notify)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java中继承类的初始化顺序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/27/Java多线程之线程同步(wait&notify)/" class="article-date">
+    <a href="/2017/03/27/Java中继承类的初始化顺序/" class="article-date">
   <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
 </a>
     
@@ -124,7 +128,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/27/Java多线程之线程同步(wait&notify)/">Java多线程之线程同步(wait&amp;notify)</a>
+      <a class="article-title" href="/2017/03/27/Java中继承类的初始化顺序/">Java中继承类的初始化顺序</a>
     </h1>
   
 
@@ -132,68 +136,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Java多线程之线程同步"><a href="#Java多线程之线程同步" class="headerlink" title="Java多线程之线程同步"></a>Java多线程之线程同步</h4><p>本文参考文章：<br><br><a href="http://www.cnblogs.com/mengdd/archive/2013/02/20/2917956.html" target="_blank" rel="external">《Java 多线程（七） 线程间的通信——wait及notify方法》</a></p>
-<p>我们在开发过程中经常会用到多线程，因其重要性，多线程也成为面试时必定考察的知识点。多线程有并发的优势，正确使用能够提高程序的运行效率；使用不当则会弄巧成拙。本文就针对多线程中，线程同步技术作一介绍。</p>
-<h2 id="线程同步在讲什么？"><a href="#线程同步在讲什么？" class="headerlink" title="线程同步在讲什么？"></a>线程同步在讲什么？</h2><p>线程并发会引发线程安全问题，所谓线程安全问题在网上已经有很多资料了，我就不在这里赘述了。如果你还不是太了解的话可以看看这篇文章<a href="http://www.iteye.com/topic/806990" target="_blank" rel="external">《java线程安全总结》</a>。简言之就是多线程无序并发导致多次运行的结果不唯一。逻辑上，即使线程并发，最终结果也应该是唯一确定的，线程同步做的就是这样一件事。</p>
-<h2 id="如何实现线程同步？"><a href="#如何实现线程同步？" class="headerlink" title="如何实现线程同步？"></a>如何实现线程同步？</h2><p>分析会产生线程安全问题的例子，我们能够发现一点：线程在大部分时间并发是没有问题的，但是涉及到全局数据的读写就会出现错误。所以避免线程同时读写全局变量，就能够实现线程同步。我们可以设计一种机制，为全局变量加一把锁，所有访问全局变量的线程都要先竞争这把锁，只有线程竞争到了这把锁，才可以对全局变量进行读写。</p>
-<h2 id="java中是怎么做的？"><a href="#java中是怎么做的？" class="headerlink" title="java中是怎么做的？"></a>java中是怎么做的？</h2><p>java中使用<code>synchronized</code>关键字来实现上述机制。带有synchronized声明的方法或者代码块之间是互斥执行的，也就是说同一时间，一个变量锁只有一个synchronized的代码块在执行。下面是我写的一个简单的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by travis.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = SynchronizedDemo.class.getSimpleName();</div><div class="line">    <span class="keyword">private</span> Object lock = <span class="keyword">new</span> Object();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">new</span> A().start();</div><div class="line">        <span class="keyword">new</span> A().start();</div><div class="line">        <span class="keyword">new</span> A().start();</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                System.out.println(TAG+<span class="string">"::count="</span>+count);</div><div class="line">                <span class="keyword">while</span> (count != <span class="number">0</span>)&#123;</div><div class="line">                    lock.wait();</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        System.out.println(TAG+<span class="string">"::three threads complete"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    System.out.println(TAG+<span class="string">"::thread "</span>+count);</div><div class="line">                    sleep((<span class="keyword">long</span>) (Math.random() * <span class="number">5000</span>));</div><div class="line">                    count--;</div><div class="line">                    lock.notify();</div><div class="line">                &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样就实现了三个线程，顺次执行的效果。最终的输出结果是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SynchronizedDemo::thread 3</div><div class="line">SynchronizedDemo::count=2</div><div class="line">SynchronizedDemo::thread 2</div><div class="line">SynchronizedDemo::thread 1</div><div class="line">SynchronizedDemo::three threads complete</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Java多线程之线程同步(wait&notify)/" data-id="cj0uytlfx000dawjhj83bk85k" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android如何完全退出程序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/27/Android如何完全退出程序/" class="article-date">
-  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Android好像不能完全退出应用程序"><a href="#Android好像不能完全退出应用程序" class="headerlink" title="Android好像不能完全退出应用程序"></a>Android好像不能完全退出应用程序</h4><p>先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！</p>
-<p>需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。</p>
-<p>这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：</p>
-<h5 id="1-finish"><a href="#1-finish" class="headerlink" title="1. finish()"></a>1. finish()</h5><p>调用此方法的Activity能够结束，但task内其它Activity、后台Service、正在执行的线程等不会退出。</p>
-<p>如果使用这种方法还要做额外的一些工作。</p>
+        <p>人没钱不如鬼，汤没盐不如水。慢慢你会发现，一颗好心永远比不上一张好嘴。</p>
+<p>本文转载自：<a href="http://blog.csdn.net/zhangjk1993/article/details/24066085" target="_blank" rel="external">《java静态绑定与动态绑定》</a><br>程序绑定的概念：</p>
+<blockquote>
+<p>绑定指的是一个方法的调用与方法所在的类（方法主体）关联起来。对java来说，绑定分为静态绑定和动态绑定；或者叫做前期绑定和后期绑定。</p>
+</blockquote>
+<p>静态绑定：<br>在程序执行前方法已经被绑定(也就是说在变异过程中就已经知道这个方法到底是哪个类中的方法)，由编译器或其它连接程序实现。针对java简单的可以理解为程序编译器的绑定；这里特别说明一点，java当中的方法只有final，static，private和构造方法是前期绑定。<br>动态绑定：<br>后期绑定：在运行时根据具体对象的类型进行绑定。<br>若一种语言实现了后期绑定，必须同时提供一些机制，可在运行期间判断对象的类型，并分别调用适当的方法。也就是说，编译器此时依然不知道对象的类型，但方法调用机制自己能去调查，找到真缺德方法主体。不同的语言对于后期绑定的是想方法是有所区别的。但我们至少可以这样认为：它们都要在对象中安插某些特殊类型的信息。</p>
+<p>动态绑定的过程：</p>
 <ol>
-<li>在应用的Application里面维护一个Activity调用栈，栈中保存当前task中的Activity;</li>
-<li>需要完全退出应用时，遍历栈中所有Activity，并调用其finish()方法。</li>
-<li>调用android.os.Process.killProcess()方法,完全退出当前进程。</li>
+<li>虚拟机提取对象的实际类型的方法表；</li>
+<li>虚拟机搜索方法签名；</li>
+<li>调用方法。</li>
 </ol>
-<h5 id="2-killProcess-或System-exit"><a href="#2-killProcess-或System-exit" class="headerlink" title="2. killProcess()或System.exit()"></a>2. killProcess()或System.exit()</h5><p>这两个方法的功能和效果类似，放在一块说。调用之后能够结束当前进程，但是Android系统的机制会立马重启一个新的进程，并恢复原来的task。也就是说，这种方法仅仅finish掉栈顶的Activity。</p>
-<h5 id="3-addFlag"><a href="#3-addFlag" class="headerlink" title="3. addFlag()"></a>3. addFlag()</h5><p>如果App的task的root是某一个特定的Activity，比方说我们经常把MainActivity作为task的root。我们就可以通过Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP方式启动MainActivity，并在MainActivity的onNewIntent()方法中调用finish()、killProcess()退出进程。</p>
-<p>后面还有所谓的<code>抛出异常退出程序</code>、<code>配合EventBus集体自杀</code>。<font color="#ff3131">这些方法其实都不能杀死真正的把应用进程杀死！！！</font>我尝试了很多方法，最终都没有成功。如果哪位同学有好的方法还望不啬赐教！</p>
-<p>不过即使在这样一种情况下，我们也可以实现一个假的完全退出应用，只不过需要我们自己留意应用中各模块的初始化时机。</p>
+<p>关于final、static、private和构造方法是前期绑定的理解<br>对于private的方法，首先一点它不能被继承，既然不能被继承那么就没有办法通过它子类的对象来调用，而只能通过这个类自身的对象来调用。因此就可以说private方法和定义这个方法的类绑定在了一起。</p>
+<p>final方法虽然可以被继承，但不能被重写，虽然子类对象可以调用，但是调用的都是弗雷中所定义的那个final方法，（由此我们可以知道将方法声明为final类型，一是为了防止方法被覆盖，二是为了有效的关闭java中的动态绑定）。<br>构造绑法也是不能被继承的，因此便意识也可以知道这个构造方法到底属于哪一个类。</p>
+<p>对于static方法，具体的原理我也说不太清楚。不过根据网上的资料和我自己做的实验可以得出结论：static方法可以被子类继承，但是不能被子类重写，但是可以被子类隐藏。（这里的意思是说，如果父类中有一个static方法，它的子类里如果没有对应的方法，那么当子类对象调用这个方法时就会使用父类的方法。而如果子类中定义了相同的方法，则会调用子类中定义的方法。唯一的不同就是，当子类对象上转型为父类对象时，不论子类中有没有定义这个静态方法，该对象都会使用父类中的静态方法。因此这里说静态方法可以被隐藏而不能被覆盖。这与子类隐藏父类中的成员变量是一样的。隐藏和覆盖的区别在于，子类对象转换成父类对象之后，狗狗访问父类被隐藏的变量和方法，而不能访问父类被覆盖的方法）</p>
+<p>由上面我们可以得出一个结论，如果一个方法不可被继承或者继承后不可被覆盖，那么这个方法就采用的静态绑定。</p>
+<p>java的编译与运行</p>
+<p>java的编译过程是将java源文件编译成字节码（jvm可执行文件，即class文件）的过程，在这个过程中java是不与内存打交道的，在这个过程中编译器会进行语法的分析，如果语法不正确就会报错。</p>
+<p>java的运行过程是指jvm装载字节码文件并解释执行。在这个过程才是真正的创立内存布局，执行java程序。</p>
+<p>java字节码的执行有两种方式：（1）即时编译方式：编译器先将字节编译成及其码，然后再执行该机器码；（2） 解释执行方式：解释器通过每次解释并执行一小段代码来完成java字节码程序的所有操作。（这里我们可以看出java程序在执行过程中其实进行了两次转换，线转换成字节码再转换成机器码。这也证实java能一次编译，到处运行的原因。在不同的平台上装上对应的java虚拟机，就可以是想相同字节码装换乘不同平台上的机器码，从而在不同的平台上运行）</p>
+<p>前面已经说了对于java当中的方法而言，除了final，static，private和构造方法是前期绑定外，其他的方法全部为动态绑定。</p>
+<p>而动态绑定的典型发生在父类子类的转换声明之下：<br>比如：Parent p = new Children();</p>
+<p>其具体过程细节如下：</p>
+<ol>
+<li><p>编译器检查对象的声明类型和方法名。<br>假设我们调用x.f(args)，并且x已经被声明为C类的对象，那么编译器就会列举出C类中所有的名称为f的方法和从C的超类继承过来的f方法。</p>
+</li>
+<li><p>接下来编译器检查方法调用中提供的参数类型。<br>如果在所有名称为f的方法中有一个参数类型和调用提供的参数类型最为匹配那么就调用这个方法，这个过程叫做“重载解析”。</p>
+</li>
+<li><p>当程序运行并且使用动态绑定调用方法时，虚拟机必须调用同x所只想的实际类型相匹配的方法版本。</p>
+</li>
+</ol>
+<p>假设实际类型为D(C的子类)，如果D类定义了f(String)那么该方法被调用，否则就在D的超类中搜寻方法f(String)以此类推。</p>
+<p>jvm调用一个类方法是(静态方法)，它会基于对象引用的类型（通常在编译时可知）来选择所调用的方法。相反，当虚拟机调用一个实例方法时，它会基于对象实际的类型（只能在运行时得知）来选择所调用的方法，这就是动态绑定，是多态的一种。动态绑定为解决实际的业务问题提供了很大的灵活性，是一种非常优美的机制。</p>
+<p>与方法不同，在处理java类中的成员变量(实例变量和类变量)时，并不是采用运行时绑定，而是一般意义上的静态绑定。所以在向上转换的情况下，对象的方法可以找到子类，而对象的属性（成员变量）还是父类的属性（子类对父类成员变量的隐藏）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;  </div><div class="line">    <span class="keyword">protected</span> String name = <span class="string">"父亲属性"</span>;  </div><div class="line">&#125;  </div><div class="line">　　  </div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;  </div><div class="line">    <span class="keyword">protected</span> String name = <span class="string">"儿子属性"</span>;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        Father sample = <span class="keyword">new</span> Son();  </div><div class="line">        System.out.println(<span class="string">"调用的属性："</span> + sample.name);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结论，调用的成员为父亲的属性。</p>
+<p>这个结果表明，子类的对象(由父类的引用handle)调用的是父类的成员变量。所以必须明确，运行时（动态）绑定针对的范畴只是对象的方法。现在试图调用子类的成员变量name，该怎么做？最简单的方法是将该成员变量封装成方法getter形式。</p>
+<p>代码如下：<br>java代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;  </div><div class="line">    <span class="keyword">protected</span> String name = <span class="string">"父亲属性"</span>;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> name;  </div><div class="line">    &#125;  </div><div class="line">&#125;　　  </div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;  </div><div class="line">    <span class="keyword">protected</span> String name = <span class="string">"儿子属性"</span>;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> name;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        Father sample = <span class="keyword">new</span> Son();  </div><div class="line">        System.out.println(<span class="string">"调用的属性:"</span> + sample.getName());  </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果：调用的是儿子的属性<br>java因为什么对属性要采取静态的绑定方法呢？这是因为静态绑定有很多的好处，它可以让我们在编译期就发现程序中的错误，而不是在运行期。这样就可以提高程序的运行效率！而对方法采取动态绑定是为了实现多态，多态是java的一大特色。多态也是面向对象的关键技术之一，所以java以效率为代价来实现多态是很值得的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Android如何完全退出程序/" data-id="cj0uytlf60001awjhmanku0lg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/Java中继承类的初始化顺序/" data-id="cj0uyxkae000dbajhgtg8f321" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +234,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Android在启动页预加载/" data-id="cj0uytlf80002awjhijxjew5m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/Android在启动页预加载/" data-id="cj0uyxk9q0001bajh56nqlvmq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android如何完全退出程序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Android如何完全退出程序/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Android好像不能完全退出应用程序"><a href="#Android好像不能完全退出应用程序" class="headerlink" title="Android好像不能完全退出应用程序"></a>Android好像不能完全退出应用程序</h4><p>先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！</p>
+<p>需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。</p>
+<p>这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：</p>
+<h5 id="1-finish"><a href="#1-finish" class="headerlink" title="1. finish()"></a>1. finish()</h5><p>调用此方法的Activity能够结束，但task内其它Activity、后台Service、正在执行的线程等不会退出。</p>
+<p>如果使用这种方法还要做额外的一些工作。</p>
+<ol>
+<li>在应用的Application里面维护一个Activity调用栈，栈中保存当前task中的Activity;</li>
+<li>需要完全退出应用时，遍历栈中所有Activity，并调用其finish()方法。</li>
+<li>调用android.os.Process.killProcess()方法,完全退出当前进程。</li>
+</ol>
+<h5 id="2-killProcess-或System-exit"><a href="#2-killProcess-或System-exit" class="headerlink" title="2. killProcess()或System.exit()"></a>2. killProcess()或System.exit()</h5><p>这两个方法的功能和效果类似，放在一块说。调用之后能够结束当前进程，但是Android系统的机制会立马重启一个新的进程，并恢复原来的task。也就是说，这种方法仅仅finish掉栈顶的Activity。</p>
+<h5 id="3-addFlag"><a href="#3-addFlag" class="headerlink" title="3. addFlag()"></a>3. addFlag()</h5><p>如果App的task的root是某一个特定的Activity，比方说我们经常把MainActivity作为task的root。我们就可以通过Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP方式启动MainActivity，并在MainActivity的onNewIntent()方法中调用finish()、killProcess()退出进程。</p>
+<p>后面还有所谓的<code>抛出异常退出程序</code>、<code>配合EventBus集体自杀</code>。<font color="#ff3131">这些方法其实都不能杀死真正的把应用进程杀死！！！</font>我尝试了很多方法，最终都没有成功。如果哪位同学有好的方法还望不啬赐教！</p>
+<p>不过即使在这样一种情况下，我们也可以实现一个假的完全退出应用，只不过需要我们自己留意应用中各模块的初始化时机。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Android如何完全退出程序/" data-id="cj0uyxk9t0002bajh2zga8nvb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,54 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/" data-id="cj0uytlg3000gawjhs9sc780a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Retrofit中的Json解析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/27/Retrofit中的Json解析/" class="article-date">
-  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/27/Retrofit中的Json解析/">Retrofit中的Json解析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>下面是我使用Retrofit的一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> QYService service;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder()</div><div class="line">                .retryOnConnectionFailure(<span class="keyword">true</span>)</div><div class="line">                .connectTimeout(<span class="number">10L</span>, TimeUnit.SECONDS)</div><div class="line">                .build();</div><div class="line"></div><div class="line">        Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(QYService.BASE_URL)</div><div class="line">                .client(client)</div><div class="line">                .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">                .build();</div><div class="line"></div><div class="line">        service = retrofit.create(QYService.class);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>今天我要讲的就是addConverterFactory这一行——Retrofit是如何解析Json数据的。</p>
-<h2 id="Json字符串到Java对象"><a href="#Json字符串到Java对象" class="headerlink" title="Json字符串到Java对象"></a>Json字符串到Java对象</h2><p>我们看一下GsonConverterFactory的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GsonConverterFactory</span> <span class="keyword">extends</span> <span class="title">Converter</span>.<span class="title">Factory</span> </span>&#123;</div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Create an instance using a default &#123;<span class="doctag">@link</span> Gson&#125; instance for conversion. Encoding to JSON and</div><div class="line">   * decoding from JSON (when no charset is specified by a header) will use UTF-8.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GsonConverterFactory <span class="title">create</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> create(<span class="keyword">new</span> Gson());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Create an instance using &#123;<span class="doctag">@code</span> gson&#125; for conversion. Encoding to JSON and</div><div class="line">   * decoding from JSON (when no charset is specified by a header) will use UTF-8.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GsonConverterFactory <span class="title">create</span><span class="params">(Gson gson)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonConverterFactory(gson);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">GsonConverterFactory</span><span class="params">(Gson gson)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (gson == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"gson == null"</span>);</div><div class="line">    <span class="keyword">this</span>.gson = gson;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> Converter&lt;ResponseBody, ?&gt; responseBodyConverter(Type type, Annotation[] annotations,</div><div class="line">      Retrofit retrofit) &#123;</div><div class="line">    TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, adapter);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> Converter&lt;?, RequestBody&gt; requestBodyConverter(Type type,</div><div class="line">      Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) &#123;</div><div class="line">    TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonRequestBodyConverter&lt;&gt;(gson, adapter);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>可以看到GsonConverterFactory提供了两个方法<code>responseBodyConverter</code>、<code>requestBodyConverter</code>。从名字其实就能猜测出，前者是解析response的，后者是解析request的。我们单追踪前者，就是这两行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, adapter);</div></pre></td></tr></table></figure></p>
-<p>这里有一个TypeAdapter没有见过，后面的TypeToken倒是旧相识了。追踪Gson源码我们发现：在构建Gson时，为Gson注册了很多TypeAdapterFactory，就是这些TypeAdapterFactory为Gson提供了解析各种数据的能力。其中这一行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">factories.add(<span class="keyword">new</span> ReflectiveTypeAdapterFactory(</div><div class="line">        constructorConstructor, fieldNamingStrategy, excluder, jsonAdapterFactory));</div></pre></td></tr></table></figure></p>
-<p>就提供了解析自定义复杂对象的能力。这里不再展开讲了，有兴趣的话可以了解一下此处的源码，我们只需要知道这么一点就够了：TypeAdapter封装了Json字符串到Java对象的映射关系，能够把Java字符串解析成Java对象。</p>
-<p>我们在来看GsonResponseBodyConverter的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GsonResponseBodyConverter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">ResponseBody</span>, <span class="title">T</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> TypeAdapter&lt;T&gt; adapter;</div><div class="line"></div><div class="line">  GsonResponseBodyConverter(Gson gson, TypeAdapter&lt;T&gt; adapter) &#123;</div><div class="line">    <span class="keyword">this</span>.gson = gson;</div><div class="line">    <span class="keyword">this</span>.adapter = adapter;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> T <span class="title">convert</span><span class="params">(ResponseBody value)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    JsonReader jsonReader = gson.newJsonReader(value.charStream());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">return</span> adapter.read(jsonReader);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">      value.close();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这个类提供了一个convert方法最终把Response解析成我们需要Java对象。</p>
-<h2 id="Retrofit调用GsonConverterFactory"><a href="#Retrofit调用GsonConverterFactory" class="headerlink" title="Retrofit调用GsonConverterFactory"></a>Retrofit调用GsonConverterFactory</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//retrofit2.Retrofit 仅列出相关代码</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">create</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; service)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> (T) Proxy.newProxyInstance(service.getClassLoader(), <span class="keyword">new</span> Class&lt;?&gt;[] &#123; service &#125;,</div><div class="line">        <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">          ...</div><div class="line">          <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">              <span class="keyword">throws</span> Throwable &#123;</div><div class="line">            ...</div><div class="line">            ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">            OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">            <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>我们发现最终的网络请求是OkHttpCall完成的，我们继续追踪OkHttpCall<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//retrofit2.OkHttpCall  仅列出相关代码</span></div><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response&lt;T&gt; <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    okhttp3.Call call;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> parseResponse(call.execute());</div><div class="line">  &#125;</div><div class="line"><span class="comment">//解析response  </span></div><div class="line"><span class="function">Response&lt;T&gt; <span class="title">parseResponse</span><span class="params">(okhttp3.Response rawResponse)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    ResponseBody rawBody = rawResponse.body();</div><div class="line">    ...</div><div class="line">    ExceptionCatchingRequestBody catchingBody = <span class="keyword">new</span> ExceptionCatchingRequestBody(rawBody);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      T body = serviceMethod.toResponse(catchingBody);</div><div class="line">      <span class="keyword">return</span> Response.success(body, rawResponse);</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"><span class="comment">/** Builds a method return value from an HTTP response body. */</span></div><div class="line"> <span class="function">R <span class="title">toResponse</span><span class="params">(ResponseBody body)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">   <span class="keyword">return</span> responseConverter.convert(body);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-<p>至此Retrofit解析Json的脉络就很清晰了:Retrofit调用了OkHttpCall执行网络请求，获得网络返回之后调用早前注册的GsonConverterFactory中的GsonResponseBodyConverter解析网络数据。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Retrofit中的Json解析/" data-id="cj0uytlg4000hawjht9fue4hw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/" data-id="cj0uyxkah000gbajhzzn921e1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -387,7 +376,54 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/RecyclerView完全显示Item/" data-id="cj0uytlg7000iawjh5j4zcl7e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/RecyclerView完全显示Item/" data-id="cj0uyxkai000hbajh1nsl1x9s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Retrofit中的Json解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Retrofit中的Json解析/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面是我使用Retrofit的一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> QYService service;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder()</div><div class="line">                .retryOnConnectionFailure(<span class="keyword">true</span>)</div><div class="line">                .connectTimeout(<span class="number">10L</span>, TimeUnit.SECONDS)</div><div class="line">                .build();</div><div class="line"></div><div class="line">        Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(QYService.BASE_URL)</div><div class="line">                .client(client)</div><div class="line">                .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">                .build();</div><div class="line"></div><div class="line">        service = retrofit.create(QYService.class);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>今天我要讲的就是addConverterFactory这一行——Retrofit是如何解析Json数据的。</p>
+<h2 id="Json字符串到Java对象"><a href="#Json字符串到Java对象" class="headerlink" title="Json字符串到Java对象"></a>Json字符串到Java对象</h2><p>我们看一下GsonConverterFactory的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GsonConverterFactory</span> <span class="keyword">extends</span> <span class="title">Converter</span>.<span class="title">Factory</span> </span>&#123;</div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Create an instance using a default &#123;<span class="doctag">@link</span> Gson&#125; instance for conversion. Encoding to JSON and</div><div class="line">   * decoding from JSON (when no charset is specified by a header) will use UTF-8.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GsonConverterFactory <span class="title">create</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> create(<span class="keyword">new</span> Gson());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Create an instance using &#123;<span class="doctag">@code</span> gson&#125; for conversion. Encoding to JSON and</div><div class="line">   * decoding from JSON (when no charset is specified by a header) will use UTF-8.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GsonConverterFactory <span class="title">create</span><span class="params">(Gson gson)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonConverterFactory(gson);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">GsonConverterFactory</span><span class="params">(Gson gson)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (gson == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"gson == null"</span>);</div><div class="line">    <span class="keyword">this</span>.gson = gson;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> Converter&lt;ResponseBody, ?&gt; responseBodyConverter(Type type, Annotation[] annotations,</div><div class="line">      Retrofit retrofit) &#123;</div><div class="line">    TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, adapter);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> Converter&lt;?, RequestBody&gt; requestBodyConverter(Type type,</div><div class="line">      Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) &#123;</div><div class="line">    TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonRequestBodyConverter&lt;&gt;(gson, adapter);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到GsonConverterFactory提供了两个方法<code>responseBodyConverter</code>、<code>requestBodyConverter</code>。从名字其实就能猜测出，前者是解析response的，后者是解析request的。我们单追踪前者，就是这两行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, adapter);</div></pre></td></tr></table></figure></p>
+<p>这里有一个TypeAdapter没有见过，后面的TypeToken倒是旧相识了。追踪Gson源码我们发现：在构建Gson时，为Gson注册了很多TypeAdapterFactory，就是这些TypeAdapterFactory为Gson提供了解析各种数据的能力。其中这一行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">factories.add(<span class="keyword">new</span> ReflectiveTypeAdapterFactory(</div><div class="line">        constructorConstructor, fieldNamingStrategy, excluder, jsonAdapterFactory));</div></pre></td></tr></table></figure></p>
+<p>就提供了解析自定义复杂对象的能力。这里不再展开讲了，有兴趣的话可以了解一下此处的源码，我们只需要知道这么一点就够了：TypeAdapter封装了Json字符串到Java对象的映射关系，能够把Java字符串解析成Java对象。</p>
+<p>我们在来看GsonResponseBodyConverter的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GsonResponseBodyConverter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">ResponseBody</span>, <span class="title">T</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> TypeAdapter&lt;T&gt; adapter;</div><div class="line"></div><div class="line">  GsonResponseBodyConverter(Gson gson, TypeAdapter&lt;T&gt; adapter) &#123;</div><div class="line">    <span class="keyword">this</span>.gson = gson;</div><div class="line">    <span class="keyword">this</span>.adapter = adapter;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> T <span class="title">convert</span><span class="params">(ResponseBody value)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    JsonReader jsonReader = gson.newJsonReader(value.charStream());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">return</span> adapter.read(jsonReader);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">      value.close();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个类提供了一个convert方法最终把Response解析成我们需要Java对象。</p>
+<h2 id="Retrofit调用GsonConverterFactory"><a href="#Retrofit调用GsonConverterFactory" class="headerlink" title="Retrofit调用GsonConverterFactory"></a>Retrofit调用GsonConverterFactory</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//retrofit2.Retrofit 仅列出相关代码</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">create</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; service)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> (T) Proxy.newProxyInstance(service.getClassLoader(), <span class="keyword">new</span> Class&lt;?&gt;[] &#123; service &#125;,</div><div class="line">        <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">          ...</div><div class="line">          <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">              <span class="keyword">throws</span> Throwable &#123;</div><div class="line">            ...</div><div class="line">            ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">            OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">            <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>我们发现最终的网络请求是OkHttpCall完成的，我们继续追踪OkHttpCall<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//retrofit2.OkHttpCall  仅列出相关代码</span></div><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response&lt;T&gt; <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    okhttp3.Call call;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> parseResponse(call.execute());</div><div class="line">  &#125;</div><div class="line"><span class="comment">//解析response  </span></div><div class="line"><span class="function">Response&lt;T&gt; <span class="title">parseResponse</span><span class="params">(okhttp3.Response rawResponse)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    ResponseBody rawBody = rawResponse.body();</div><div class="line">    ...</div><div class="line">    ExceptionCatchingRequestBody catchingBody = <span class="keyword">new</span> ExceptionCatchingRequestBody(rawBody);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      T body = serviceMethod.toResponse(catchingBody);</div><div class="line">      <span class="keyword">return</span> Response.success(body, rawResponse);</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"><span class="comment">/** Builds a method return value from an HTTP response body. */</span></div><div class="line"> <span class="function">R <span class="title">toResponse</span><span class="params">(ResponseBody body)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">   <span class="keyword">return</span> responseConverter.convert(body);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>至此Retrofit解析Json的脉络就很清晰了:Retrofit调用了OkHttpCall执行网络请求，获得网络返回之后调用早前注册的GsonConverterFactory中的GsonResponseBodyConverter解析网络数据。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Retrofit中的Json解析/" data-id="cj0uyxkai000ibajh970mvbcf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Retrofit详解/" data-id="cj0uytlg9000jawjh9f4c99v7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/Retrofit详解/" data-id="cj0uyxkak000jbajhvgtic7wl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -516,7 +552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/android图文混排/" data-id="cj0uytlga000kawjh6x6p8nx9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/android图文混排/" data-id="cj0uyxkal000kbajhchai27tf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -570,7 +606,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/ViewPager+Fragments+LazyLoad/" data-id="cj0uytlgc000lawjhmyjwvik0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/ViewPager+Fragments+LazyLoad/" data-id="cj0uyxkan000lbajhevs15hdq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -615,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/自定义圆角图片控件<Xfermode方式>/" data-id="cj0uytlgi000qawjhg6801jd6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/自定义圆角图片控件<Xfermode方式>/" data-id="cj0uyxkar000qbajhlb0rjdve" class="article-share-link">Share</a>
       
       
     </footer>
@@ -654,7 +690,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/后台应用被系统回收后重启/" data-id="cj0uytlgf000nawjhvi6qo8hz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/后台应用被系统回收后重启/" data-id="cj0uyxkap000nbajhl47a3zav" class="article-share-link">Share</a>
       
       
     </footer>
