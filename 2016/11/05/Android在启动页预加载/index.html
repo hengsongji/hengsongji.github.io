@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android在启动页预加载 | Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="项目需求：展示欢迎页的同时执行token登录和首页预加载背景：在此之前，展示欢迎页和token登录等网络操作是串行的，所以用户点开App到最终看到首页的时间就是：”展示欢迎页的时间”+”登录时间”+”请求首页数据时间”。单线程处理这些事情的优点是逻辑清晰，控制简单。缺点也非常突出：用户的体验并不好，特别是网络状况不佳的时候，等待时间大幅增加。
+这个版本我们加入了跳过功能，对于等待时间的要求更高了，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android在启动页预加载">
+<meta property="og:url" content="http://yoursite.com/2016/11/05/Android在启动页预加载/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:description" content="项目需求：展示欢迎页的同时执行token登录和首页预加载背景：在此之前，展示欢迎页和token登录等网络操作是串行的，所以用户点开App到最终看到首页的时间就是：”展示欢迎页的时间”+”登录时间”+”请求首页数据时间”。单线程处理这些事情的优点是逻辑清晰，控制简单。缺点也非常突出：用户的体验并不好，特别是网络状况不佳的时候，等待时间大幅增加。
+这个版本我们加入了跳过功能，对于等待时间的要求更高了，">
+<meta property="og:updated_time" content="2017-03-29T18:23:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android在启动页预加载">
+<meta name="twitter:description" content="项目需求：展示欢迎页的同时执行token登录和首页预加载背景：在此之前，展示欢迎页和token登录等网络操作是串行的，所以用户点开App到最终看到首页的时间就是：”展示欢迎页的时间”+”登录时间”+”请求首页数据时间”。单线程处理这些事情的优点是逻辑清晰，控制简单。缺点也非常突出：用户的体验并不好，特别是网络状况不佳的时候，等待时间大幅增加。
+这个版本我们加入了跳过功能，对于等待时间的要求更高了，">
+  
+    <link rel="alternate" href="https://github.com/hengsongji/" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不忘初心 砥砺前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+       <!-- <a id="nav-rss-link" class="nav-icon" href="https://github.com/hengsongji/" title="github"></a>-->
+       	    <!-- <a href="https://github.com/hengsongji/" title="Github" target="_blank"><i class="nav-icon iconfont icon-github"></i></a>-->
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Android在启动页预加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/05/Android在启动页预加载/" class="article-date">
+  <time datetime="2016-11-05T13:56:52.000Z" itemprop="datePublished">2016-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android在启动页预加载
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目需求：展示欢迎页的同时执行token登录和首页预加载"><a href="#项目需求：展示欢迎页的同时执行token登录和首页预加载" class="headerlink" title="项目需求：展示欢迎页的同时执行token登录和首页预加载"></a>项目需求：展示欢迎页的同时执行token登录和首页预加载</h2><h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p>在此之前，展示欢迎页和token登录等网络操作是串行的，所以用户点开App到最终看到首页的时间就是：”展示欢迎页的时间”+”登录时间”+”请求首页数据时间”。单线程处理这些事情的优点是逻辑清晰，控制简单。缺点也非常突出：用户的体验并不好，特别是网络状况不佳的时候，等待时间大幅增加。</p>
+<p>这个版本我们加入了跳过功能，对于等待时间的要求更高了，我不得不“磨刀霍霍”着手解决这个问题。</p>
+<h2 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h2><ol>
+<li>欢迎页可能执行的网络操作：检查版本更新、token登录、预加载首页数据（两个接口）；</li>
+<li>如果本地保存有用户的登录信息，执行token登录；</li>
+<li>如果本地未保存用户的登录信息，跳转到登录页；</li>
+<li>如果出现网络连接错误（断网、超时等），直接提示用户”网络错误”，退出软件；</li>
+<li>如果需要强制更新，跳转到登录页进行更新；</li>
+<li>token登录失败，跳转到登录页；</li>
+<li>全部接口请求完成（仅指token登录成功），携带数据启动首页。</li>
+</ol>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><ol>
+<li>展示欢迎页的同时启动所有网络请求；</li>
+<li>使用AtomicInteger计数，使用AtomicBoolean标记关键事件（是否达到展示时间、是否发生网络错误、是否需要跳转到登录页）；</li>
+<li>每个网络操作完成时要及时更新计数器，如果发生“关心”事件要进行登记；</li>
+<li>每个网络操作完成时都要进行终点测试（判断自己是否是最后完成者，是的话就要执行跳转）。</li>
+</ol>
+<h2 id="关键代码："><a href="#关键代码：" class="headerlink" title="关键代码："></a>关键代码：</h2><h3 id="网络请求样例："><a href="#网络请求样例：" class="headerlink" title="网络请求样例："></a>网络请求样例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">VersionModelImpl.CheckVersionListener listener = <span class="keyword">new</span> VersionModelImpl.CheckVersionListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(JSONObject data)</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="keyword">final</span> Version version = <span class="keyword">new</span> Gson().fromJson(data.toString(), Version.class);</div><div class="line">                    <span class="keyword">if</span> (isMustUpdate(version)) &#123;</div><div class="line">                        mNeedLogin.set(<span class="keyword">true</span>);<span class="comment">//登记状态</span></div><div class="line">                    &#125;</div><div class="line">                    isCheckVersionSuccess = <span class="keyword">true</span>;<span class="comment">// 记录检查版本的结果</span></div><div class="line">                    mStepsAtomicInteger.getAndIncrement();<span class="comment">// 计数</span></div><div class="line">                    finalTest();<span class="comment">//终点测试</span></div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                    mNeedLogin.set(<span class="keyword">true</span>);</div><div class="line">                    mStepsAtomicInteger.getAndIncrement();</div><div class="line">                    finalTest();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(String code, String message)</span> </span>&#123;</div><div class="line">                mIsNetworkError.set(<span class="keyword">true</span>);<span class="comment">// 登记网络错误</span></div><div class="line">                mStepsAtomicInteger.getAndIncrement();</div><div class="line">                finalTest();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div></pre></td></tr></table></figure>
+<h3 id="终点测试方法："><a href="#终点测试方法：" class="headerlink" title="终点测试方法："></a>终点测试方法：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//终点测试，判断预加载是否都完成</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">finalTest</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!mAllowFinalTestAtomicBoolean.get()) &#123;<span class="comment">//时间是否满足</span></div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(mIsNetworkError.get())&#123;<span class="comment">//如果网络错误</span></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">final</span> Dialog dialog = confirm(<span class="string">"网络信号不好哟~宝宝卡得要哭了~"</span>);</div><div class="line">                dialog.setOnDismissListener(<span class="keyword">new</span> DialogInterface.OnDismissListener() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDismiss</span><span class="params">(DialogInterface dialog)</span> </span>&#123;</div><div class="line">                        onBackPressed();</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mNeedLogin.get()) &#123;<span class="comment">//如果需要登录</span></div><div class="line">            LoginActivity.enterLogin(PictureActivity.<span class="keyword">this</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mStepsAtomicInteger.intValue() &gt;= <span class="number">4</span>) &#123;<span class="comment">//所有网络请求都已返回</span></div><div class="line">            <span class="keyword">if</span> (isCheckVersionSuccess &amp;&amp; isLoginByTokenSuccess) &#123;</div><div class="line">                enterMainActivity();</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                LoginActivity.enterLogin(PictureActivity.<span class="keyword">this</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/05/Android在启动页预加载/" data-id="cj0vb5b1o000nvqjh433vmyau" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-system/">Android system</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/13/Java动态代理Proxy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java动态代理Proxy
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/03/这个字段到底有没有返回/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">这个字段到底有没有返回</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-system/">Android system</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/skill/">skill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-system/" style="font-size: 17.5px;">Android system</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Json/" style="font-size: 12.5px;">Json</a> <a href="/tags/UI/" style="font-size: 20px;">UI</a> <a href="/tags/gradle/" style="font-size: 12.5px;">gradle</a> <a href="/tags/skill/" style="font-size: 12.5px;">skill</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/25/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

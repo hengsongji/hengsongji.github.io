@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何调试多文件上传 | Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="服务器如何设置？我调试的时候使用的是PHP服务器，只写一句话：
+1print_r($_FILES);
+App端如何设置？客户端直接使用的是[okhttputils][1]，上传代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647OkHttpUtils.post()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何调试多文件上传">
+<meta property="og:url" content="http://yoursite.com/2017/01/12/如何调试多文件上传/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:description" content="服务器如何设置？我调试的时候使用的是PHP服务器，只写一句话：
+1print_r($_FILES);
+App端如何设置？客户端直接使用的是[okhttputils][1]，上传代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647OkHttpUtils.post()">
+<meta property="og:updated_time" content="2017-03-29T18:19:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何调试多文件上传">
+<meta name="twitter:description" content="服务器如何设置？我调试的时候使用的是PHP服务器，只写一句话：
+1print_r($_FILES);
+App端如何设置？客户端直接使用的是[okhttputils][1]，上传代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647OkHttpUtils.post()">
+  
+    <link rel="alternate" href="https://github.com/hengsongji/" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不忘初心 砥砺前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+       <!-- <a id="nav-rss-link" class="nav-icon" href="https://github.com/hengsongji/" title="github"></a>-->
+       	    <!-- <a href="https://github.com/hengsongji/" title="Github" target="_blank"><i class="nav-icon iconfont icon-github"></i></a>-->
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-如何调试多文件上传" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/12/如何调试多文件上传/" class="article-date">
+  <time datetime="2017-01-12T09:06:20.000Z" itemprop="datePublished">2017-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何调试多文件上传
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="服务器如何设置？"><a href="#服务器如何设置？" class="headerlink" title="服务器如何设置？"></a>服务器如何设置？</h2><p>我调试的时候使用的是PHP服务器，只写一句话：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print_r($_FILES);</div></pre></td></tr></table></figure>
+<h2 id="App端如何设置？"><a href="#App端如何设置？" class="headerlink" title="App端如何设置？"></a>App端如何设置？</h2><p>客户端直接使用的是[okhttputils][1]，上传代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">OkHttpUtils.post()</div><div class="line">    .url(<span class="string">"http://192.168.1.28/demo/index.php"</span>)</div><div class="line">    .addFile(<span class="string">"file[]"</span>, paths.get(<span class="number">0</span>).substring(paths.get(<span class="number">0</span>).indexOf(<span class="string">"/"</span>)), <span class="keyword">new</span> File(paths.get(<span class="number">0</span>)))</div><div class="line">    .addFile(<span class="string">"file[]"</span>, paths.get(<span class="number">1</span>).substring(paths.get(<span class="number">1</span>).indexOf(<span class="string">"/"</span>)), <span class="keyword">new</span> File(paths.get(<span class="number">1</span>)))</div><div class="line">    .build()</div><div class="line">    .execute(<span class="keyword">new</span> StringCallback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Call call, Exception e, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(String response, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">            Log.d(<span class="string">"MainActivity"</span>, <span class="string">"response="</span> + response);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"> * Try to return the absolute file path from the given Uri</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> context</div><div class="line"> * <span class="doctag">@param</span> uri</div><div class="line"> * <span class="doctag">@return</span> the file path or null</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRealFilePath</span><span class="params">(<span class="keyword">final</span> Context context, <span class="keyword">final</span> Uri uri)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == uri) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">final</span> String scheme = uri.getScheme();</div><div class="line">    String data = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">if</span> (scheme == <span class="keyword">null</span>)</div><div class="line">        data = uri.getPath();</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (ContentResolver.SCHEME_FILE.equals(scheme)) &#123;</div><div class="line">        data = uri.getPath();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ContentResolver.SCHEME_CONTENT.equals(scheme)) &#123;</div><div class="line">        Cursor cursor = context.getContentResolver().query(uri, <span class="keyword">new</span> String[]&#123;MediaStore.Images.ImageColumns.DATA&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != cursor) &#123;</div><div class="line">            <span class="keyword">if</span> (cursor.moveToFirst()) &#123;</div><div class="line">                <span class="keyword">int</span> index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);</div><div class="line">                <span class="keyword">if</span> (index &gt; -<span class="number">1</span>) &#123;</div><div class="line">                    data = cursor.getString(index);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            cursor.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> data;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="联调："><a href="#联调：" class="headerlink" title="联调："></a>联调：</h2><p>如果得到以下返回则说明成功了</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">Array</div><div class="line">(</div><div class="line">  [file] =&gt; Array</div><div class="line">         (</div><div class="line">           [name] =&gt; Array</div><div class="line">                  (</div><div class="line">                    [0] =&gt; IMG_20161017_112752.jpg</div><div class="line">                    [1] =&gt; img-c6d422f96853ea6e7d73837b23d5fa3c.jpg</div><div class="line">                  )</div><div class="line"></div><div class="line">            [type] =&gt; Array</div><div class="line">                  (</div><div class="line">                     [0] =&gt;</div><div class="line">                     [1] =&gt; image/jpeg</div><div class="line">                  )</div><div class="line">            [tmp_name] =&gt; Array</div><div class="line">                      (</div><div class="line">                        [0] =&gt;</div><div class="line">                        [1] =&gt; D:\xampp\tmp\php65FE.tmp</div><div class="line">                      )</div><div class="line">            [error] =&gt; Array</div><div class="line">                      (</div><div class="line">                        [0] =&gt; 1</div><div class="line">                        [1] =&gt; 0</div><div class="line">                       )</div><div class="line">            [size] =&gt; Array</div><div class="line">                      (</div><div class="line">                         [0] =&gt; 0</div><div class="line">                         [1] =&gt; 50318</div><div class="line">                      )</div><div class="line">            )</div><div class="line">)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/12/如何调试多文件上传/" data-id="cj0vb5b2r001svqjhn074okwp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/skill/">skill</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/20/Looper和Handler类/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Looper和Handler类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/24/Android WebView以post方式加载url/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android WebView以POST方式加载URL</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-system/">Android system</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/skill/">skill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-system/" style="font-size: 17.5px;">Android system</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Json/" style="font-size: 12.5px;">Json</a> <a href="/tags/UI/" style="font-size: 20px;">UI</a> <a href="/tags/gradle/" style="font-size: 12.5px;">gradle</a> <a href="/tags/skill/" style="font-size: 12.5px;">skill</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/25/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -439,8 +439,9 @@ body {
   margin-right: -15px;
 }
 #nav-rss-link:before {
-  content: "\f09e";
+  content: "\eaf6";
 }
+# content: "\f09e":before,
 #nav-search-btn:before {
   content: "\f002";
 }
@@ -503,6 +504,21 @@ body {
 .search-form-submit:hover,
 .search-form-submit:focus {
   color: #777;
+}
+@font-face {
+  font-family: "iconfont";
+  src: url("iconfont.eot?t=1490793630801");
+  src: url("iconfont.eot?t=1490793630801#iefix") format('embedded-opentype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-github:before {
+  content: "\eaf6";
 }
 .article {
   margin: 50px 0;

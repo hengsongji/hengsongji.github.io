@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Handler的执行时机 | Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Handler的执行时机“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。
+我们先来补充一下基础知识:《Android View系统分析之三Activity的启动与显示》《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handler的执行时机">
+<meta property="og:url" content="http://yoursite.com/2016/10/10/Handler的执行时机/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:description" content="Handler的执行时机“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。
+我们先来补充一下基础知识:《Android View系统分析之三Activity的启动与显示》《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI">
+<meta property="og:updated_time" content="2017-03-29T17:47:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Handler的执行时机">
+<meta name="twitter:description" content="Handler的执行时机“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。
+我们先来补充一下基础知识:《Android View系统分析之三Activity的启动与显示》《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI">
+  
+    <link rel="alternate" href="https://github.com/hengsongji/" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不忘初心 砥砺前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+       <!-- <a id="nav-rss-link" class="nav-icon" href="https://github.com/hengsongji/" title="github"></a>-->
+       	    <!-- <a href="https://github.com/hengsongji/" title="Github" target="_blank"><i class="nav-icon iconfont icon-github"></i></a>-->
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Handler的执行时机" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/10/Handler的执行时机/" class="article-date">
+  <time datetime="2016-10-10T05:15:00.000Z" itemprop="datePublished">2016-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Handler的执行时机
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Handler的执行时机"><a href="#Handler的执行时机" class="headerlink" title="Handler的执行时机"></a>Handler的执行时机</h2><p>“Handler是否会阻塞主线程？”本篇文章即是对这个问题的回答。</p>
+<p>我们先来补充一下基础知识:<br><br><a href="http://blog.csdn.net/bboyfeiyu/article/details/39136313" target="_blank" rel="external">《Android View系统分析之三Activity的启动与显示》</a><br><br><a href="http://blog.csdn.net/u013435893/article/details/50903082" target="_blank" rel="external">《Android中为什么主线程不会因为Looper.loop()方法造成阻塞》</a><br><br>阅读上面两篇文章，我们了解到，ActivityThread内部在启动之初就开始了一个Looper循环，Android应用程序中所有在UI线程任务都是在这个Looper循环内部完成的。即Android程序的主体就是Looper循环，当Looper循环退出时，进程就应该结束了。</p>
+<p>又到了大家最喜欢的“看程序，写输出”环节(笔试题)，分析下面的Android代码，写输出。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">BaseActivity</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        <span class="comment">//布局文件中没有内容不用理会</span></div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        handelr.sendEmptyMessage(<span class="number">1</span>);</div><div class="line">        handelr.sendEmptyMessage(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStart();</div><div class="line">        System.out.println(<span class="string">"onStart"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        System.out.println(<span class="string">"onResume"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//这里不做内存泄漏处理了，请自行处理</span></div><div class="line">    <span class="keyword">private</span> Handler handelr = <span class="keyword">new</span> Handler()&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</div><div class="line">            <span class="keyword">switch</span> (msg.what)&#123;</div><div class="line">                <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">                    System.out.println(<span class="string">"first"</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">                    System.out.println(<span class="string">"second"</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上述Activity是应用程序的启动Activity，请问启动应用之后的输出？<br><br>输出结果是什么？你造吗？<br><br>经过老夫实际测试，输出结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">onStart</div><div class="line">onResume</div><div class="line">first</div><div class="line">second</div></pre></td></tr></table></figure></p>
+<p>你答对了吗？</p>
+<p>反正结果跟我的答案有出入，这让我很不爽，reading the fucking source code！</p>
+<p>我们的目的是理清<code>Activity启动时的时序</code>。看上面的文章了解Activity的启动过程，我们发现一个Activity诞生于handleLaunchActivity方法，我们以此作为入口，进行探查。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//仅列出本文相关代码</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleLaunchActivity</span><span class="params">(ActivityClientRecord r, Intent customIntent, String reason)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    Activity a = performLaunchActivity(r, customIntent);</div><div class="line">    ...</div><div class="line">    <span class="keyword">if</span> (a != <span class="keyword">null</span>) &#123;</div><div class="line">        ...</div><div class="line">        handleResumeActivity(r.token, <span class="keyword">false</span>, r.isForward,</div><div class="line">                !r.activity.mFinished &amp;&amp; !r.startsNotResumed, r.lastProcessedSeq, reason);</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，在handleLaunchActivity方法中先后调用了<code>performLaunchActivity</code>和<code>handleResumeActivity</code>两个方法。第一个有待进一步梳理，第二个方法已经比较明了了，对应的就是Activity的onResume方法。那么现在的一个时序就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">performLaunchActivity &gt;&gt; handleResumeActivity</div></pre></td></tr></table></figure>
+<p>我们近一步探查performLaunchActivity：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//仅列出本文相关代码</span></div><div class="line"><span class="function"><span class="keyword">private</span> Activity <span class="title">performLaunchActivity</span><span class="params">(ActivityClientRecord r, Intent customIntent)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    Activity activity = <span class="keyword">null</span>;</div><div class="line">    java.lang.ClassLoader cl = r.packageInfo.getClassLoader();</div><div class="line">    activity = mInstrumentation.newActivity(</div><div class="line">            cl, component.getClassName(), r.intent);</div><div class="line">    ...</div><div class="line">    mInstrumentation.callActivityOnCreate(activity, r.state);</div><div class="line">    ...</div><div class="line">    activity.performStart();</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> activity;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看到这里你一定能看出来了，在performLaunchActivity，也是先后调用了两个Activity生命周期相关的方法<code>mInstrumentation.callActivityOnCreate</code>和<code>activity.performStart</code>，对应的分别是Activity中的onCreate方法和onStart方法。那么我们完善之后的时序就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">callActivityOnCreate &gt;&gt; performStart &gt;&gt; handleResumeActivity</div></pre></td></tr></table></figure></p>
+<p>小伙伴，你看明白了吗？Activity启动的时候，这三个方法并不是通过调用三次sendMessage的分三次调用，而是在handleLaunchActivity中逐个调用。根据Handler的执行规则，当前Message被处理完成之后才会处理MessageQueue中下一个Message，所以我们在onCreate中发出的消息必须等到handleLaunchActivity执行完，才会被处理。然后，按FIFO的规则处理两个消息：fist，second。</p>
+<p>综上，<font color="#ff3131">Handler确实能够避免阻塞UI线程的作用，它只是把消息放入MessageQueue中不一定立即执行。同时我们也要知道，如果Handler内部handleMessage方法执行耗时操作的话，UI线程是会被阻塞的！</font></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/10/Handler的执行时机/" data-id="cj0vb5b1v000svqjhc12k5a6j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-system/">Android system</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/03/这个字段到底有没有返回/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          这个字段到底有没有返回
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/02/状态栏背景图片可滑动/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">状态栏背景图片可滑动</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-system/">Android system</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/skill/">skill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-system/" style="font-size: 17.5px;">Android system</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Json/" style="font-size: 12.5px;">Json</a> <a href="/tags/UI/" style="font-size: 20px;">UI</a> <a href="/tags/gradle/" style="font-size: 12.5px;">gradle</a> <a href="/tags/skill/" style="font-size: 12.5px;">skill</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/25/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

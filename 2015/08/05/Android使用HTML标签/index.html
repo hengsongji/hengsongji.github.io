@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android使用HTML标签 | Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如果一行文字出现了两种颜色，这个时候该怎么处理呢？TextView拼接？如果文字的行数不确定呢？
+其实Android是有现成解决方案的，这就是HTML标记。在网页中我们为文字添加不同的标签，就能呈现不同的样式，非常方便。Android的TextView控件也是支持HTML标记的，不过多了点额外的操作。下面就是一个样例，设置了字体颜色并且在中间嵌了一张图片。
+12345678910111213141">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android使用HTML标签">
+<meta property="og:url" content="http://yoursite.com/2015/08/05/Android使用HTML标签/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:description" content="如果一行文字出现了两种颜色，这个时候该怎么处理呢？TextView拼接？如果文字的行数不确定呢？
+其实Android是有现成解决方案的，这就是HTML标记。在网页中我们为文字添加不同的标签，就能呈现不同的样式，非常方便。Android的TextView控件也是支持HTML标记的，不过多了点额外的操作。下面就是一个样例，设置了字体颜色并且在中间嵌了一张图片。
+12345678910111213141">
+<meta property="og:image" content="http://7xvpu1.com1.z0.glb.clouddn.com/android_html.png">
+<meta property="og:updated_time" content="2017-03-29T17:11:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android使用HTML标签">
+<meta name="twitter:description" content="如果一行文字出现了两种颜色，这个时候该怎么处理呢？TextView拼接？如果文字的行数不确定呢？
+其实Android是有现成解决方案的，这就是HTML标记。在网页中我们为文字添加不同的标签，就能呈现不同的样式，非常方便。Android的TextView控件也是支持HTML标记的，不过多了点额外的操作。下面就是一个样例，设置了字体颜色并且在中间嵌了一张图片。
+12345678910111213141">
+<meta name="twitter:image" content="http://7xvpu1.com1.z0.glb.clouddn.com/android_html.png">
+  
+    <link rel="alternate" href="https://github.com/hengsongji/" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不忘初心 砥砺前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+       <!-- <a id="nav-rss-link" class="nav-icon" href="https://github.com/hengsongji/" title="github"></a>-->
+       	    <!-- <a href="https://github.com/hengsongji/" title="Github" target="_blank"><i class="nav-icon iconfont icon-github"></i></a>-->
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Android使用HTML标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/05/Android使用HTML标签/" class="article-date">
+  <time datetime="2015-08-05T06:14:37.000Z" itemprop="datePublished">2015-08-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android使用HTML标签
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果一行文字出现了两种颜色，这个时候该怎么处理呢？TextView拼接？如果文字的行数不确定呢？</p>
+<p>其实Android是有现成解决方案的，这就是HTML标记。在网页中我们为文字添加不同的标签，就能呈现不同的样式，非常方便。Android的TextView控件也是支持HTML标记的，不过多了点额外的操作。下面就是一个样例，设置了字体颜色并且在中间嵌了一张图片。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by hsji on 2015/8/5.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HtmlStringActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>&#123;</div><div class="line">    TextView content;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_html_string);</div><div class="line">        content = (TextView) findViewById(R.id.content);</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * This methos is called when the HTML parser encounters an &lt;img&gt; tag.</div><div class="line">         * The source argument is the string from the "src" attribute;</div><div class="line">         * the return value should be a Drawable representation of the image or null for a generic replacement image.</div><div class="line">         * Make sure you call setBounds() on your Drawable if it doesn't already have its bounds set.</div><div class="line">         */</div><div class="line">        Html.ImageGetter imageGetter = <span class="keyword">new</span> Html.ImageGetter()&#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> Drawable <span class="title">getDrawable</span><span class="params">(String source)</span> </span>&#123;</div><div class="line">                Drawable drawable = <span class="keyword">null</span>;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                     drawable = getResources().getDrawable(Integer.parseInt(source));</div><div class="line">                     drawable.setBounds(<span class="number">0</span>, <span class="number">0</span>, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());</div><div class="line">                &#125;<span class="keyword">catch</span> (NumberFormatException e)&#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> drawable;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">        sb.append(<span class="string">"&lt;font color=\"#ff0000\"&gt;我&lt;/font&gt;"</span>)</div><div class="line">                .append(<span class="string">"&lt;img src=\""</span>+R.drawable.heart+<span class="string">"\"/&gt;"</span>)</div><div class="line">                .append(<span class="string">"&lt;font color=\"#ff0000\"&gt;董英&lt;/font&gt;"</span>);</div><div class="line">        Spanned spanned = Html.fromHtml(sb.toString(),imageGetter,<span class="keyword">null</span>);</div><div class="line">        content.setText(spanned);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是效果图：<br><img src="http://7xvpu1.com1.z0.glb.clouddn.com/android_html.png" width="300/"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/05/Android使用HTML标签/" data-id="cj0vb5b100003vqjh4a3rofr4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/19/Java异常处理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java异常处理的一个例子
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/30/Android Json解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android Json解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-system/">Android system</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/skill/">skill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-system/" style="font-size: 17.5px;">Android system</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Json/" style="font-size: 12.5px;">Json</a> <a href="/tags/UI/" style="font-size: 20px;">UI</a> <a href="/tags/gradle/" style="font-size: 12.5px;">gradle</a> <a href="/tags/skill/" style="font-size: 12.5px;">skill</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/25/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

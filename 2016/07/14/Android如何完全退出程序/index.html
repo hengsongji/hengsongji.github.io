@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android如何完全退出程序 | Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！
+需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。
+这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：
+1. finish()调用此方法的Activity能够结束，但task内其它Activ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android如何完全退出程序">
+<meta property="og:url" content="http://yoursite.com/2016/07/14/Android如何完全退出程序/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:description" content="先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！
+需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。
+这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：
+1. finish()调用此方法的Activity能够结束，但task内其它Activ">
+<meta property="og:updated_time" content="2017-03-29T17:52:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android如何完全退出程序">
+<meta name="twitter:description" content="先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！
+需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。
+这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：
+1. finish()调用此方法的Activity能够结束，但task内其它Activ">
+  
+    <link rel="alternate" href="https://github.com/hengsongji/" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不忘初心 砥砺前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+       <!-- <a id="nav-rss-link" class="nav-icon" href="https://github.com/hengsongji/" title="github"></a>-->
+       	    <!-- <a href="https://github.com/hengsongji/" title="Github" target="_blank"><i class="nav-icon iconfont icon-github"></i></a>-->
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Android如何完全退出程序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/14/Android如何完全退出程序/" class="article-date">
+  <time datetime="2016-07-14T13:03:36.000Z" itemprop="datePublished">2016-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android如何完全退出程序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！</p>
+<p>需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。</p>
+<p>这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：</p>
+<h2 id="1-finish"><a href="#1-finish" class="headerlink" title="1. finish()"></a>1. finish()</h2><p>调用此方法的Activity能够结束，但task内其它Activity、后台Service、正在执行的线程等不会退出。</p>
+<p>如果使用这种方法还要做额外的一些工作。</p>
+<ol>
+<li>在应用的Application里面维护一个Activity调用栈，栈中保存当前task中的Activity;</li>
+<li>需要完全退出应用时，遍历栈中所有Activity，并调用其finish()方法。</li>
+<li>调用android.os.Process.killProcess()方法,完全退出当前进程。</li>
+</ol>
+<h2 id="2-killProcess-或System-exit"><a href="#2-killProcess-或System-exit" class="headerlink" title="2. killProcess()或System.exit()"></a>2. killProcess()或System.exit()</h2><p>这两个方法的功能和效果类似，放在一块说。调用之后能够结束当前进程，但是Android系统的机制会立马重启一个新的进程，并恢复原来的task。也就是说，这种方法仅仅finish掉栈顶的Activity。</p>
+<h2 id="3-addFlag"><a href="#3-addFlag" class="headerlink" title="3. addFlag()"></a>3. addFlag()</h2><p>如果App的task的root是某一个特定的Activity，比方说我们经常把MainActivity作为task的root。我们就可以通过Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP方式启动MainActivity，并在MainActivity的onNewIntent()方法中调用finish()、killProcess()退出进程。</p>
+<p>后面还有所谓的<code>抛出异常退出程序</code>、<code>配合EventBus集体自杀</code>。<font color="#ff3131">这些方法其实都不能杀死真正的把应用进程杀死！！！</font>我尝试了很多方法，最终都没有成功。如果哪位同学有好的方法还望不啬赐教！</p>
+<p>不过即使在这样一种情况下，我们也可以实现一个假的完全退出应用，只不过需要我们自己留意应用中各模块的初始化时机。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/14/Android如何完全退出程序/" data-id="cj0vb5b1c000bvqjh3cp4m6qk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-system/">Android system</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/24/RecyclerView完全显示Item/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RecyclerView完整显示Item
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/05/Java中继承类的初始化顺序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java中继承类的初始化顺序</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-system/">Android system</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/skill/">skill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-system/" style="font-size: 17.5px;">Android system</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Json/" style="font-size: 12.5px;">Json</a> <a href="/tags/UI/" style="font-size: 20px;">UI</a> <a href="/tags/gradle/" style="font-size: 12.5px;">gradle</a> <a href="/tags/skill/" style="font-size: 12.5px;">skill</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/25/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ViewPager+Fragments+LazyLoad | Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ViewPager+Fragments可以帮助Android开发者方便地实现多个tab页之间的切换。可是在使用中你有没有遇到过一些不是那么美丽的状况呢？比方说，进入页面的前几秒钟特别卡顿？从别的页面切换回来，竟然重新加载了页面？从网上Copy了LazyLoad代码下来，来回切换了几次崩溃了？WTF！！！ViewPager+Fragments用起来并不复杂，不消十分钟你就可以把它引入项目，但是要想获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ViewPager+Fragments+LazyLoad">
+<meta property="og:url" content="http://yoursite.com/2017/02/13/ViewPager+Fragments+LazyLoad/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta property="og:description" content="ViewPager+Fragments可以帮助Android开发者方便地实现多个tab页之间的切换。可是在使用中你有没有遇到过一些不是那么美丽的状况呢？比方说，进入页面的前几秒钟特别卡顿？从别的页面切换回来，竟然重新加载了页面？从网上Copy了LazyLoad代码下来，来回切换了几次崩溃了？WTF！！！ViewPager+Fragments用起来并不复杂，不消十分钟你就可以把它引入项目，但是要想获">
+<meta property="og:updated_time" content="2017-03-29T18:24:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ViewPager+Fragments+LazyLoad">
+<meta name="twitter:description" content="ViewPager+Fragments可以帮助Android开发者方便地实现多个tab页之间的切换。可是在使用中你有没有遇到过一些不是那么美丽的状况呢？比方说，进入页面的前几秒钟特别卡顿？从别的页面切换回来，竟然重新加载了页面？从网上Copy了LazyLoad代码下来，来回切换了几次崩溃了？WTF！！！ViewPager+Fragments用起来并不复杂，不消十分钟你就可以把它引入项目，但是要想获">
+  
+    <link rel="alternate" href="https://github.com/hengsongji/" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不忘初心 砥砺前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+       <!-- <a id="nav-rss-link" class="nav-icon" href="https://github.com/hengsongji/" title="github"></a>-->
+       	    <!-- <a href="https://github.com/hengsongji/" title="Github" target="_blank"><i class="nav-icon iconfont icon-github"></i></a>-->
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ViewPager+Fragments+LazyLoad" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/" class="article-date">
+  <time datetime="2017-02-13T13:56:08.000Z" itemprop="datePublished">2017-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ViewPager+Fragments+LazyLoad
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ViewPager+Fragments可以帮助Android开发者方便地实现多个tab页之间的切换。可是在使用中你有没有遇到过一些不是那么美丽的状况呢？比方说，进入页面的前几秒钟特别卡顿？从别的页面切换回来，竟然重新加载了页面？从网上Copy了LazyLoad代码下来，来回切换了几次崩溃了？WTF！！！ViewPager+Fragments用起来并不复杂，不消十分钟你就可以把它引入项目，但是要想获得好的体验，就要多花一点功夫了。这篇文章，我就记录一下自己在开发过程中使用到的优化方法。</p>
+<p>##LazyLoad</p>
+<p>首先我们来复习一下ViewPager的基础知识(使用FragmentAdapter)。ViewPager默认至多预加载2个Fragment(可见页面称为VisibleFragment，可见页面左右各一个InvisibleFragment)，至少预加载一个页面(可见页面是第一个，仅在右侧有一个InvisibleFragment)。也就是说，我们第一次进入页面时，ViewPager至少加载了两个Fragment，一个VisibleFragment，一个InvisibleFragment。如果InvisibleFragment有什么耗时操作，就会连累VisibleFragment特别卡顿。</p>
+<p>聪明如你肯定会想，这个问题so easy，调用一下<code>ViewPager.setOffscreenPageLimit(0)</code>，禁止ViewPager预加载不就ok了嘛！naive！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOffscreenPageLimit</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (limit &lt; DEFAULT_OFFSCREEN_PAGES) &#123;</div><div class="line">          Log.w(TAG, <span class="string">"Requested offscreen page limit "</span> + limit + <span class="string">" too small; defaulting to "</span> +</div><div class="line">                  DEFAULT_OFFSCREEN_PAGES);</div><div class="line">          limit = DEFAULT_OFFSCREEN_PAGES;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (limit != mOffscreenPageLimit) &#123;</div><div class="line">          mOffscreenPageLimit = limit;</div><div class="line">          populate();</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>从<code>ViewPager.setOffscreenPageLimit(int limit)</code>方法的源码，可以看到预加载页面至少是<code>DEFAULT_OFFSCREEN_PAGES</code>,这个值是1。</p>
+<p>你可能又会想了，<font color="#ff3131">InvisibleFragment页面从不可见转为可见，这个状态肯定能够捕捉到吧，在页面变为可见的时候执行耗时操作不就可以了嘛</font>！对头！！！这个方法就是Fragment.setUserVisibleHint(boolean isVisibleToUser),一旦Fragment可见状态发生变化，这个方法就会被调用。所以我们就可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 是否已加载数据</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mLoaded = <span class="keyword">false</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一旦页面可见性发生变化，这个方法就会被调用</div><div class="line"> * 当页面可见且数据未加载时，加载数据</div><div class="line"> * <span class="doctag">@param</span> isVisibleToUser</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserVisibleHint</span><span class="params">(<span class="keyword">boolean</span> isVisibleToUser)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser);</div><div class="line">    <span class="keyword">if</span> (isVisibleToUser &amp;&amp; !mLoaded) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;</div><div class="line">        loadData();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个就是所谓的LazyLoad！</p>
+<p>学到上面的新技能之后你兴冲冲地去实验，编码&gt;&gt;运行&gt;&gt;不错呀！写博客的小哥没骗我！&gt;&gt;纳尼！崩溃了！这个死骗子，肯定拿假的LazyLoad来骗我，看我不骂死他！看官大爷请息怒！我真没骗你，不信咱们接着往下看！</p>
+<p>这个地方的崩溃应该是NullPointerException，提示在View初始化之前即对其进行了操作。看来setUserVisibleHint()方法被调用时，onCreateView()方法还没有被调用。要解决这个问题我们要首先弄清楚Fragment中相关方法被调用的顺序(你可以在自己项目中把方法的调用都打印出来)。</p>
+<p>然后我们发现Fragment中相关方法的调用顺序是这个样子的：<br>setUserVisibleHint()&gt;&gt;onCreateView()&gt;&gt;onActivityCreated()。</p>
+<p>setUserVisibleHint()确实是在onCreateView()之前被调用的，这可怎么办呀？表怂呀！这还能难得住你？添加一个全局变量，标识onCreateView()方法是否被调用，如果没有被调用，setUserVisibleHint()不执行加载数据的操作。然后我们还需要在onActivityCreated()里面二次判断是否首次加载。现在代码长这个样子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * onCreateView()是否被调用</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mOnCreateViewInvoked = <span class="keyword">false</span>;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 是否已加载数据</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mLoaded = <span class="keyword">false</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一旦页面可见性发生变化，这个方法就会被调用</div><div class="line"> * 当onCreateView()已经被调用&amp;&amp;页面可见&amp;&amp;数据未加载时，加载数据</div><div class="line"> * <span class="doctag">@param</span> isVisibleToUser</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserVisibleHint</span><span class="params">(<span class="keyword">boolean</span> isVisibleToUser)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser);</div><div class="line">    <span class="keyword">if</span> (mOnCreateViewInvoked &amp;&amp; isVisibleToUser &amp;&amp; !mLoaded) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;</div><div class="line">        loadData();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Nullable</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    mOnCreateViewInvoked = <span class="keyword">true</span>;</div><div class="line">    <span class="comment">// your code</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 二次测试是否首次加载</div><div class="line"> * <span class="doctag">@param</span> savedInstanceState</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onActivityCreated</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onActivityCreated(savedInstanceState);</div><div class="line">    <span class="keyword">if</span> (getUserVisibleHint() &amp;&amp; !mLoaded) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;</div><div class="line">        loadData();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你再试试，现在是不是不崩溃了！我跟你讲了，我写的是真的LazyLoad！</p>
+<p>刷了一会儿你又发现问题了，从别的页面返回之后咋又重新加载数据了？在tab页中，我们可能并不希望，页面每次可见的时候数据都重新加载一遍，而是只在第一次可见的时候加载。看官大爷您这个需求比较简单，只需要一行代码就可以搞定了。我们只需要在ViewPager初始化的时候添加一行设置ViewPager.setOffscreenPageLimit(sizeOfFragments)。这样ViewPager中所有的Framgment都不会被回收了，陪你到天荒地老！</p>
+<p>接下来写一篇文章介绍一下两个ViewPager嵌套时，Fragment可见性的判断。</p>
+<p>完！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/13/ViewPager+Fragments+LazyLoad/" data-id="cj0vb5b2e001fvqjho0iys342" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-system/">Android system</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/20/Android应用内开新进程的一些行为记录/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android应用内开新进程的一些行为记录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/25/后台应用被系统回收后重启/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">后台应用被系统回收后重启</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-system/">Android system</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/skill/">skill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-system/" style="font-size: 17.5px;">Android system</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Json/" style="font-size: 12.5px;">Json</a> <a href="/tags/UI/" style="font-size: 20px;">UI</a> <a href="/tags/gradle/" style="font-size: 12.5px;">gradle</a> <a href="/tags/skill/" style="font-size: 12.5px;">skill</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/25/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
