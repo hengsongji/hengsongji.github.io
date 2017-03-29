@@ -3,24 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>RecyclerView֮之IllegalStateException | Travis&#39;s Blog</title>
+  <title>归档: 2017/3 | Travis&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用场景：ListView，List data，Adapter。出现场景：refresh() {data.clear();point1;operate(); // 耗时操作，给data.add()数据point2;adapter.notifyDataSetChange();}
-用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起
-java.lang.I">
-<meta property="og:type" content="article">
-<meta property="og:title" content="RecyclerView֮之IllegalStateException">
-<meta property="og:url" content="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Travis's Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2017/03/page/3/index.html">
 <meta property="og:site_name" content="Travis's Blog">
-<meta property="og:description" content="使用场景：ListView，List data，Adapter。出现场景：refresh() {data.clear();point1;operate(); // 耗时操作，给data.add()数据point2;adapter.notifyDataSetChange();}
-用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起
-java.lang.I">
-<meta property="og:updated_time" content="2017-03-28T16:24:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RecyclerView֮之IllegalStateException">
-<meta name="twitter:description" content="使用场景：ListView，List data，Adapter。出现场景：refresh() {data.clear();point1;operate(); // 耗时操作，给data.add()数据point2;adapter.notifyDataSetChange();}
-用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起
-java.lang.I">
+<meta name="twitter:title" content="Travis's Blog">
   
     <link rel="alternate" href="/atom.xml" title="Travis&#39;s Blog" type="application/atom+xml">
   
@@ -69,65 +59,101 @@ java.lang.I">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-RecyclerView֮IllegalStateException" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/27/RecyclerView֮IllegalStateException/" class="article-date">
-  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      RecyclerView֮之IllegalStateException
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/03/27/如何调试多文件上传/" class="archive-article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">3月 27</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/27/如何调试多文件上传/">如何调试多文件上传</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用场景：ListView，List data，Adapter。<br>出现场景：<br>refresh() {<br>data.clear();<br>point1;<br>operate(); // 耗时操作，给data.add()数据<br>point2;<br>adapter.notifyDataSetChange();<br>}</p>
-<p>用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起</p>
-<p>java.lang.IllegalStateException<br>The content of the adapter has changed but ListView did not receive a notification. Make sure the content of your adapter is not modified from a background thread, but only from the UI thread. Make sure your adapter calls notifyDataSetChanged() when its content changes.</p>
-<p>这个问题的根本是listView重新布局或者绘制新item的时候会调用getItemCount(),如果这个时候获取的数据和之前缓存的count不一致就会导致这个问题。解决这个问题也很简单，不要再另一个线程去修改会导致getItemCount()变化的内容。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/" data-id="cj0uytlg3000gawjhs9sc780a" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
+</article>
   
     
-<nav id="article-nav">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/03/27/状态栏背景图片可滑动/" class="archive-article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">3月 27</time>
+</a>
+      
   
-    <a href="/2017/03/27/Android在启动页预加载/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android在启动页预加载
-        
-      </div>
-    </a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/27/状态栏背景图片可滑动/">状态栏背景图片可滑动</a>
+    </h1>
   
-  
-    <a href="/2017/03/27/Retrofit中的Json解析/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Retrofit中的Json解析</div>
-    </a>
-  
-</nav>
 
-  
+    </header>
+  </div>
 </article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/03/27/这个字段到底有没有返回/" class="archive-article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">3月 27</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/27/这个字段到底有没有返回/">这个字段到底有没有返回</a>
+    </h1>
+  
 
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/03/27/hello-world/" class="archive-article-date">
+  <time datetime="2017-03-26T17:11:48.000Z" itemprop="datePublished">3月 27</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/27/hello-world/">Hello World</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2017/03/page/2/">&laquo; __('prev')</a><a class="page-number" href="/archives/2017/03/">1</a><a class="page-number" href="/archives/2017/03/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 </section>
         
           <aside id="sidebar">

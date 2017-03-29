@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Travis&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Travis's Blog">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Travis's Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Travis's Blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Travis&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Travis&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Java异常处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Java异常处理/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Java异常处理/">Java异常处理的一个例子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文记录了Java异常处理情况的一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testException</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">try</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//throw new Exception();</span></div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e)</div><div class="line">    &#123;</div><div class="line">        Log.d(TAG, <span class="string">"catch"</span>);</div><div class="line">    &#125; <span class="keyword">finally</span></div><div class="line">    &#123;</div><div class="line">        Log.d(TAG, <span class="string">"finally"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>case1：</p>
+<p>try代码：throw new Exception();<br><br>打印语句：“catch”  “finally”</p>
+</li>
+<li><p>case2:</p>
+<p>try  代码： 空<br><br>打印语句： “finally”<br><br>结      论： try代码正常结束，finally语句块被调用</p>
+</li>
+<li><p>case3:</p>
+<p>try  代码： return;<br><br>打印语句：“finally”<br><br>结      论： try代码return，finally语句块被调用</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Java异常处理/" data-id="cj0uytlfu000cawjhj95wpivn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java多线程之线程同步(wait&amp;notify)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Java多线程之线程同步(wait&notify)/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Java多线程之线程同步(wait&notify)/">Java多线程之线程同步(wait&amp;notify)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Java多线程之线程同步"><a href="#Java多线程之线程同步" class="headerlink" title="Java多线程之线程同步"></a>Java多线程之线程同步</h4><p>本文参考文章：<br><br><a href="http://www.cnblogs.com/mengdd/archive/2013/02/20/2917956.html" target="_blank" rel="external">《Java 多线程（七） 线程间的通信——wait及notify方法》</a></p>
+<p>我们在开发过程中经常会用到多线程，因其重要性，多线程也成为面试时必定考察的知识点。多线程有并发的优势，正确使用能够提高程序的运行效率；使用不当则会弄巧成拙。本文就针对多线程中，线程同步技术作一介绍。</p>
+<h2 id="线程同步在讲什么？"><a href="#线程同步在讲什么？" class="headerlink" title="线程同步在讲什么？"></a>线程同步在讲什么？</h2><p>线程并发会引发线程安全问题，所谓线程安全问题在网上已经有很多资料了，我就不在这里赘述了。如果你还不是太了解的话可以看看这篇文章<a href="http://www.iteye.com/topic/806990" target="_blank" rel="external">《java线程安全总结》</a>。简言之就是多线程无序并发导致多次运行的结果不唯一。逻辑上，即使线程并发，最终结果也应该是唯一确定的，线程同步做的就是这样一件事。</p>
+<h2 id="如何实现线程同步？"><a href="#如何实现线程同步？" class="headerlink" title="如何实现线程同步？"></a>如何实现线程同步？</h2><p>分析会产生线程安全问题的例子，我们能够发现一点：线程在大部分时间并发是没有问题的，但是涉及到全局数据的读写就会出现错误。所以避免线程同时读写全局变量，就能够实现线程同步。我们可以设计一种机制，为全局变量加一把锁，所有访问全局变量的线程都要先竞争这把锁，只有线程竞争到了这把锁，才可以对全局变量进行读写。</p>
+<h2 id="java中是怎么做的？"><a href="#java中是怎么做的？" class="headerlink" title="java中是怎么做的？"></a>java中是怎么做的？</h2><p>java中使用<code>synchronized</code>关键字来实现上述机制。带有synchronized声明的方法或者代码块之间是互斥执行的，也就是说同一时间，一个变量锁只有一个synchronized的代码块在执行。下面是我写的一个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by travis.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = SynchronizedDemo.class.getSimpleName();</div><div class="line">    <span class="keyword">private</span> Object lock = <span class="keyword">new</span> Object();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">new</span> A().start();</div><div class="line">        <span class="keyword">new</span> A().start();</div><div class="line">        <span class="keyword">new</span> A().start();</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                System.out.println(TAG+<span class="string">"::count="</span>+count);</div><div class="line">                <span class="keyword">while</span> (count != <span class="number">0</span>)&#123;</div><div class="line">                    lock.wait();</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        System.out.println(TAG+<span class="string">"::three threads complete"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    System.out.println(TAG+<span class="string">"::thread "</span>+count);</div><div class="line">                    sleep((<span class="keyword">long</span>) (Math.random() * <span class="number">5000</span>));</div><div class="line">                    count--;</div><div class="line">                    lock.notify();</div><div class="line">                &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就实现了三个线程，顺次执行的效果。最终的输出结果是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SynchronizedDemo::thread 3</div><div class="line">SynchronizedDemo::count=2</div><div class="line">SynchronizedDemo::thread 2</div><div class="line">SynchronizedDemo::thread 1</div><div class="line">SynchronizedDemo::three threads complete</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Java多线程之线程同步(wait&notify)/" data-id="cj0uytlfx000dawjhj83bk85k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android如何完全退出程序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Android如何完全退出程序/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Android如何完全退出程序/">Android如何完全退出程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Android好像不能完全退出应用程序"><a href="#Android好像不能完全退出应用程序" class="headerlink" title="Android好像不能完全退出应用程序"></a>Android好像不能完全退出应用程序</h4><p>先说结论：经试验本文提到的所有方法都不能完全退出应用程序，目前我还没有找到一个方法完全退出应用程序！</p>
+<p>需求：在App中由A启动B，再由B启动C，这个时候在C页面，完全退出应用。</p>
+<p>这是一个具体的直观的场景，实际开发中我们遇到的情况要比这个复杂得多，那么如何才能优雅地满足上述需求呢？下面我们就看一下网上常见的方法：</p>
+<h5 id="1-finish"><a href="#1-finish" class="headerlink" title="1. finish()"></a>1. finish()</h5><p>调用此方法的Activity能够结束，但task内其它Activity、后台Service、正在执行的线程等不会退出。</p>
+<p>如果使用这种方法还要做额外的一些工作。</p>
+<ol>
+<li>在应用的Application里面维护一个Activity调用栈，栈中保存当前task中的Activity;</li>
+<li>需要完全退出应用时，遍历栈中所有Activity，并调用其finish()方法。</li>
+<li>调用android.os.Process.killProcess()方法,完全退出当前进程。</li>
+</ol>
+<h5 id="2-killProcess-或System-exit"><a href="#2-killProcess-或System-exit" class="headerlink" title="2. killProcess()或System.exit()"></a>2. killProcess()或System.exit()</h5><p>这两个方法的功能和效果类似，放在一块说。调用之后能够结束当前进程，但是Android系统的机制会立马重启一个新的进程，并恢复原来的task。也就是说，这种方法仅仅finish掉栈顶的Activity。</p>
+<h5 id="3-addFlag"><a href="#3-addFlag" class="headerlink" title="3. addFlag()"></a>3. addFlag()</h5><p>如果App的task的root是某一个特定的Activity，比方说我们经常把MainActivity作为task的root。我们就可以通过Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP方式启动MainActivity，并在MainActivity的onNewIntent()方法中调用finish()、killProcess()退出进程。</p>
+<p>后面还有所谓的<code>抛出异常退出程序</code>、<code>配合EventBus集体自杀</code>。<font color="#ff3131">这些方法其实都不能杀死真正的把应用进程杀死！！！</font>我尝试了很多方法，最终都没有成功。如果哪位同学有好的方法还望不啬赐教！</p>
+<p>不过即使在这样一种情况下，我们也可以实现一个假的完全退出应用，只不过需要我们自己留意应用中各模块的初始化时机。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Android如何完全退出程序/" data-id="cj0uytlf60001awjhmanku0lg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android在启动页预加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Android在启动页预加载/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Android在启动页预加载/">Android在启动页预加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目需求：展示欢迎页的同时执行token登录和首页预加载"><a href="#项目需求：展示欢迎页的同时执行token登录和首页预加载" class="headerlink" title="项目需求：展示欢迎页的同时执行token登录和首页预加载"></a>项目需求：展示欢迎页的同时执行token登录和首页预加载</h2><h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p>在此之前，展示欢迎页和token登录等网络操作是串行的，所以用户点开App到最终看到首页的时间就是：”展示欢迎页的时间”+”登录时间”+”请求首页数据时间”。单线程处理这些事情的优点是逻辑清晰，控制简单。缺点也非常突出：用户的体验并不好，特别是网络状况不佳的时候，等待时间大幅增加。</p>
+<p>这个版本我们加入了跳过功能，对于等待时间的要求更高了，我不得不“磨刀霍霍”着手解决这个问题。</p>
+<h2 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h2><ol>
+<li>欢迎页可能执行的网络操作：检查版本更新、token登录、预加载首页数据（两个接口）；</li>
+<li>如果本地保存有用户的登录信息，执行token登录；</li>
+<li>如果本地未保存用户的登录信息，跳转到登录页；</li>
+<li>如果出现网络连接错误（断网、超时等），直接提示用户”网络错误”，退出软件；</li>
+<li>如果需要强制更新，跳转到登录页进行更新；</li>
+<li>token登录失败，跳转到登录页；</li>
+<li>全部接口请求完成（仅指token登录成功），携带数据启动首页。</li>
+</ol>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><ol>
+<li>展示欢迎页的同时启动所有网络请求；</li>
+<li>使用AtomicInteger计数，使用AtomicBoolean标记关键事件（是否达到展示时间、是否发生网络错误、是否需要跳转到登录页）；</li>
+<li>每个网络操作完成时要及时更新计数器，如果发生“关心”事件要进行登记；</li>
+<li>每个网络操作完成时都要进行终点测试（判断自己是否是最后完成者，是的话就要执行跳转）。</li>
+</ol>
+<h2 id="关键代码："><a href="#关键代码：" class="headerlink" title="关键代码："></a>关键代码：</h2><h3 id="网络请求样例："><a href="#网络请求样例：" class="headerlink" title="网络请求样例："></a>网络请求样例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">VersionModelImpl.CheckVersionListener listener = <span class="keyword">new</span> VersionModelImpl.CheckVersionListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(JSONObject data)</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="keyword">final</span> Version version = <span class="keyword">new</span> Gson().fromJson(data.toString(), Version.class);</div><div class="line">                    <span class="keyword">if</span> (isMustUpdate(version)) &#123;</div><div class="line">                        mNeedLogin.set(<span class="keyword">true</span>);<span class="comment">//登记状态</span></div><div class="line">                    &#125;</div><div class="line">                    isCheckVersionSuccess = <span class="keyword">true</span>;<span class="comment">// 记录检查版本的结果</span></div><div class="line">                    mStepsAtomicInteger.getAndIncrement();<span class="comment">// 计数</span></div><div class="line">                    finalTest();<span class="comment">//终点测试</span></div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                    mNeedLogin.set(<span class="keyword">true</span>);</div><div class="line">                    mStepsAtomicInteger.getAndIncrement();</div><div class="line">                    finalTest();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(String code, String message)</span> </span>&#123;</div><div class="line">                mIsNetworkError.set(<span class="keyword">true</span>);<span class="comment">// 登记网络错误</span></div><div class="line">                mStepsAtomicInteger.getAndIncrement();</div><div class="line">                finalTest();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div></pre></td></tr></table></figure>
+<h3 id="终点测试方法："><a href="#终点测试方法：" class="headerlink" title="终点测试方法："></a>终点测试方法：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//终点测试，判断预加载是否都完成</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">finalTest</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!mAllowFinalTestAtomicBoolean.get()) &#123;<span class="comment">//时间是否满足</span></div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(mIsNetworkError.get())&#123;<span class="comment">//如果网络错误</span></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">final</span> Dialog dialog = confirm(<span class="string">"网络信号不好哟~宝宝卡得要哭了~"</span>);</div><div class="line">                dialog.setOnDismissListener(<span class="keyword">new</span> DialogInterface.OnDismissListener() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDismiss</span><span class="params">(DialogInterface dialog)</span> </span>&#123;</div><div class="line">                        onBackPressed();</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mNeedLogin.get()) &#123;<span class="comment">//如果需要登录</span></div><div class="line">            LoginActivity.enterLogin(PictureActivity.<span class="keyword">this</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mStepsAtomicInteger.intValue() &gt;= <span class="number">4</span>) &#123;<span class="comment">//所有网络请求都已返回</span></div><div class="line">            <span class="keyword">if</span> (isCheckVersionSuccess &amp;&amp; isLoginByTokenSuccess) &#123;</div><div class="line">                enterMainActivity();</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                LoginActivity.enterLogin(PictureActivity.<span class="keyword">this</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Android在启动页预加载/" data-id="cj0uytlf80002awjhijxjew5m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RecyclerView֮IllegalStateException" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/RecyclerView֮IllegalStateException/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/RecyclerView֮IllegalStateException/">RecyclerView֮之IllegalStateException</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用场景：ListView，List data，Adapter。<br>出现场景：<br>refresh() {<br>data.clear();<br>point1;<br>operate(); // 耗时操作，给data.add()数据<br>point2;<br>adapter.notifyDataSetChange();<br>}</p>
+<p>用户在point1的时间滑动listview，在point2的时间点击listview，是否会引起</p>
+<p>java.lang.IllegalStateException<br>The content of the adapter has changed but ListView did not receive a notification. Make sure the content of your adapter is not modified from a background thread, but only from the UI thread. Make sure your adapter calls notifyDataSetChanged() when its content changes.</p>
+<p>这个问题的根本是listView重新布局或者绘制新item的时候会调用getItemCount(),如果这个时候获取的数据和之前缓存的count不一致就会导致这个问题。解决这个问题也很简单，不要再另一个线程去修改会导致getItemCount()变化的内容。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/RecyclerView֮IllegalStateException/" data-id="cj0uytlg3000gawjhs9sc780a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Retrofit中的Json解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Retrofit中的Json解析/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Retrofit中的Json解析/">Retrofit中的Json解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面是我使用Retrofit的一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> QYService service;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder()</div><div class="line">                .retryOnConnectionFailure(<span class="keyword">true</span>)</div><div class="line">                .connectTimeout(<span class="number">10L</span>, TimeUnit.SECONDS)</div><div class="line">                .build();</div><div class="line"></div><div class="line">        Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(QYService.BASE_URL)</div><div class="line">                .client(client)</div><div class="line">                .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">                .build();</div><div class="line"></div><div class="line">        service = retrofit.create(QYService.class);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>今天我要讲的就是addConverterFactory这一行——Retrofit是如何解析Json数据的。</p>
+<h2 id="Json字符串到Java对象"><a href="#Json字符串到Java对象" class="headerlink" title="Json字符串到Java对象"></a>Json字符串到Java对象</h2><p>我们看一下GsonConverterFactory的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GsonConverterFactory</span> <span class="keyword">extends</span> <span class="title">Converter</span>.<span class="title">Factory</span> </span>&#123;</div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Create an instance using a default &#123;<span class="doctag">@link</span> Gson&#125; instance for conversion. Encoding to JSON and</div><div class="line">   * decoding from JSON (when no charset is specified by a header) will use UTF-8.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GsonConverterFactory <span class="title">create</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> create(<span class="keyword">new</span> Gson());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Create an instance using &#123;<span class="doctag">@code</span> gson&#125; for conversion. Encoding to JSON and</div><div class="line">   * decoding from JSON (when no charset is specified by a header) will use UTF-8.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GsonConverterFactory <span class="title">create</span><span class="params">(Gson gson)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonConverterFactory(gson);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">GsonConverterFactory</span><span class="params">(Gson gson)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (gson == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"gson == null"</span>);</div><div class="line">    <span class="keyword">this</span>.gson = gson;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> Converter&lt;ResponseBody, ?&gt; responseBodyConverter(Type type, Annotation[] annotations,</div><div class="line">      Retrofit retrofit) &#123;</div><div class="line">    TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, adapter);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> Converter&lt;?, RequestBody&gt; requestBodyConverter(Type type,</div><div class="line">      Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) &#123;</div><div class="line">    TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GsonRequestBodyConverter&lt;&gt;(gson, adapter);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到GsonConverterFactory提供了两个方法<code>responseBodyConverter</code>、<code>requestBodyConverter</code>。从名字其实就能猜测出，前者是解析response的，后者是解析request的。我们单追踪前者，就是这两行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TypeAdapter&lt;?&gt; adapter = gson.getAdapter(TypeToken.get(type));</div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, adapter);</div></pre></td></tr></table></figure></p>
+<p>这里有一个TypeAdapter没有见过，后面的TypeToken倒是旧相识了。追踪Gson源码我们发现：在构建Gson时，为Gson注册了很多TypeAdapterFactory，就是这些TypeAdapterFactory为Gson提供了解析各种数据的能力。其中这一行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">factories.add(<span class="keyword">new</span> ReflectiveTypeAdapterFactory(</div><div class="line">        constructorConstructor, fieldNamingStrategy, excluder, jsonAdapterFactory));</div></pre></td></tr></table></figure></p>
+<p>就提供了解析自定义复杂对象的能力。这里不再展开讲了，有兴趣的话可以了解一下此处的源码，我们只需要知道这么一点就够了：TypeAdapter封装了Json字符串到Java对象的映射关系，能够把Java字符串解析成Java对象。</p>
+<p>我们在来看GsonResponseBodyConverter的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GsonResponseBodyConverter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">ResponseBody</span>, <span class="title">T</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> TypeAdapter&lt;T&gt; adapter;</div><div class="line"></div><div class="line">  GsonResponseBodyConverter(Gson gson, TypeAdapter&lt;T&gt; adapter) &#123;</div><div class="line">    <span class="keyword">this</span>.gson = gson;</div><div class="line">    <span class="keyword">this</span>.adapter = adapter;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> T <span class="title">convert</span><span class="params">(ResponseBody value)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    JsonReader jsonReader = gson.newJsonReader(value.charStream());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">return</span> adapter.read(jsonReader);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">      value.close();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个类提供了一个convert方法最终把Response解析成我们需要Java对象。</p>
+<h2 id="Retrofit调用GsonConverterFactory"><a href="#Retrofit调用GsonConverterFactory" class="headerlink" title="Retrofit调用GsonConverterFactory"></a>Retrofit调用GsonConverterFactory</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//retrofit2.Retrofit 仅列出相关代码</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">create</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; service)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> (T) Proxy.newProxyInstance(service.getClassLoader(), <span class="keyword">new</span> Class&lt;?&gt;[] &#123; service &#125;,</div><div class="line">        <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">          ...</div><div class="line">          <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">              <span class="keyword">throws</span> Throwable &#123;</div><div class="line">            ...</div><div class="line">            ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">            OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">            <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>我们发现最终的网络请求是OkHttpCall完成的，我们继续追踪OkHttpCall<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//retrofit2.OkHttpCall  仅列出相关代码</span></div><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response&lt;T&gt; <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    okhttp3.Call call;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> parseResponse(call.execute());</div><div class="line">  &#125;</div><div class="line"><span class="comment">//解析response  </span></div><div class="line"><span class="function">Response&lt;T&gt; <span class="title">parseResponse</span><span class="params">(okhttp3.Response rawResponse)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    ResponseBody rawBody = rawResponse.body();</div><div class="line">    ...</div><div class="line">    ExceptionCatchingRequestBody catchingBody = <span class="keyword">new</span> ExceptionCatchingRequestBody(rawBody);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      T body = serviceMethod.toResponse(catchingBody);</div><div class="line">      <span class="keyword">return</span> Response.success(body, rawResponse);</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"><span class="comment">/** Builds a method return value from an HTTP response body. */</span></div><div class="line"> <span class="function">R <span class="title">toResponse</span><span class="params">(ResponseBody body)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">   <span class="keyword">return</span> responseConverter.convert(body);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>至此Retrofit解析Json的脉络就很清晰了:Retrofit调用了OkHttpCall执行网络请求，获得网络返回之后调用早前注册的GsonConverterFactory中的GsonResponseBodyConverter解析网络数据。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Retrofit中的Json解析/" data-id="cj0uytlg4000hawjht9fue4hw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RecyclerView完全显示Item" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/RecyclerView完全显示Item/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/RecyclerView完全显示Item/">RecyclerView完整显示Item</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用Google Play的时候发现人家横向滑动的RecyclerView不会停在中间位置，而是滑到一个就近的位置停下来，把第一个可见的Item显示完整。</p>
+<p>毕竟Google，体验棒棒哒！于是我也利用RecyclerView来了一发，效果如下（有点粗糙）：</p>
+<p>闲话少扯，言归正传。</p>
+<p>思路：<code>监听RecyclerView的滑动事件，滑动停止的时候判断首位是否被“腰斩”（没有显示完全），如果没有显示完全则开启手动挡（RecyclerView.smoothScrollBy()）</code>。</p>
+<p>难点：</p>
+<ol>
+<li>如何判断RecyclerView停止滑动？</li>
+<li>找到第一个（或最后一个可见的Item）并判断其是否被“腰斩”</li>
+</ol>
+<p>解决思路：</p>
+<ol>
+<li>本例通过 RecyclerView.OnScrollListener 和 Handler 实现，每次发生滑动都会向Handler发送一个Message，但并不立即执行而是缓冲一段时间，这段时间内如果有新的滑动事件到达，上次的Message将被抛弃，并重新开始计时，直到缓冲时间走完而没有新Message到达，才认为这个Message是有效的。</li>
+<li>本例使用的是LinearLayoutManager,这个LayoutManager提供了一系类方法诸如findFirstVisibleItemPosition()、findViewByPosition()帮助我们找到当前第一个可见的View，然后通过getWidth(),getLocationInWindow()等方法加上一点点运算，就可以计算出Item的可见范围了。</li>
+</ol>
+<p>具体代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by hsji on 2016/10/31.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HorizonalRecyclerViewActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = HorizonalRecyclerViewActivity.class.getSimpleName();</div><div class="line">    <span class="keyword">private</span> RecyclerView mRecyclerView;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MSG_CODE_STOP = <span class="number">1999</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MSG_CODE_ACTION = <span class="number">2000</span>;</div><div class="line">    <span class="keyword">private</span> LinearLayoutManager layoutManager;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_horizonal_recyclerview);</div><div class="line">        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);</div><div class="line">        mRecyclerView.setLayoutManager(layoutManager = <span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>, LinearLayoutManager.HORIZONTAL, <span class="keyword">false</span>));</div><div class="line">        mRecyclerView.setAdapter(<span class="keyword">new</span> Adapter());</div><div class="line"></div><div class="line"></div><div class="line">        mRecyclerView.setOnScrollListener(<span class="keyword">new</span> RecyclerView.OnScrollListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrolled</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</div><div class="line">                handler.sendEmptyMessage(MSG_CODE_STOP);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> newState)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">ViewHolder</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ViewHolder(getLayoutInflater().inflate(R.layout.item, parent, <span class="keyword">false</span>));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(ViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">            TextView tv = (TextView) holder.itemView;</div><div class="line">            tv.setText(<span class="string">""</span> + position);</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (position % <span class="number">2</span> == <span class="number">1</span>) &#123;</div><div class="line">                tv.setBackgroundColor(Color.parseColor(<span class="string">"#00ffff"</span>));</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                tv.setBackgroundColor(Color.parseColor(<span class="string">"#0000ff"</span>));</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(itemView);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</div><div class="line">            <span class="keyword">switch</span> (msg.what) &#123;</div><div class="line">                <span class="keyword">case</span> MSG_CODE_STOP:</div><div class="line">                    removeCallbacksAndMessages(<span class="keyword">null</span>);</div><div class="line">                    sendEmptyMessageDelayed(MSG_CODE_ACTION, <span class="number">60L</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> MSG_CODE_ACTION:</div><div class="line">                    <span class="keyword">int</span> lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();</div><div class="line">                    <span class="keyword">if</span> (lastVisibleItemPosition == <span class="number">9</span>) &#123;</div><div class="line">                        View lastVisibleItem = layoutManager.findViewByPosition(lastVisibleItemPosition);</div><div class="line">                        <span class="keyword">int</span>[] itemLocationInWindow = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line">                        lastVisibleItem.getLocationInWindow(itemLocationInWindow);</div><div class="line">                        <span class="keyword">int</span> recyclerViewWidth = mRecyclerView.getWidth();</div><div class="line">                        <span class="keyword">int</span>[] locationInWindow = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line">                        mRecyclerView.getLocationInWindow(locationInWindow);</div><div class="line">                        <span class="keyword">int</span> offset = locationInWindow[<span class="number">0</span>] + recyclerViewWidth - itemLocationInWindow[<span class="number">0</span>];</div><div class="line">                        <span class="keyword">int</span> width = lastVisibleItem.getWidth();</div><div class="line"></div><div class="line">                        <span class="keyword">if</span> (offset &lt; width / <span class="number">2</span>) &#123;</div><div class="line">                            mRecyclerView.smoothScrollBy(-offset, <span class="number">0</span>);</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            mRecyclerView.smoothScrollBy(width - offset, <span class="number">0</span>);</div><div class="line">                        &#125;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="keyword">int</span> firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();</div><div class="line">                        View firstVisibleItem = layoutManager.findViewByPosition(firstVisibleItemPosition);</div><div class="line">                        <span class="keyword">int</span>[] locationInWindow = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line">                        mRecyclerView.getLocationInWindow(locationInWindow);</div><div class="line">                        <span class="keyword">int</span>[] itemLocationInWindow = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line">                        firstVisibleItem.getLocationInWindow(itemLocationInWindow);</div><div class="line">                        <span class="keyword">int</span> width = firstVisibleItem.getWidth();</div><div class="line">                        <span class="keyword">int</span> offset = itemLocationInWindow[<span class="number">0</span>] - locationInWindow[<span class="number">0</span>];</div><div class="line"></div><div class="line">                        <span class="keyword">if</span> (Math.abs(offset) &lt; width / <span class="number">2</span>) &#123;</div><div class="line">                            mRecyclerView.smoothScrollBy(offset, <span class="number">0</span>);</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            mRecyclerView.smoothScrollBy(width - Math.abs(offset), <span class="number">0</span>);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/RecyclerView完全显示Item/" data-id="cj0uytlg7000iawjh5j4zcl7e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Retrofit详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/Retrofit详解/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/Retrofit详解/">Retrofit详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考:<br><a href="http://square.github.io/retrofit/" target="_blank" rel="external">Retrofit官方介绍</a></p>
+<p>首先我们根据官方介绍写一个Demo，然后跟踪一次HTTP请求，参观一遍Retrofit的实现过程。</p>
+<h2 id="写一个Demo"><a href="#写一个Demo" class="headerlink" title="写一个Demo"></a>写一个Demo</h2><ol>
+<li><p>使用Retrofit时，你需要把HTTP API转化为Java接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">  <span class="meta">@GET</span>(<span class="string">"users/&#123;user&#125;/repos"</span>)</div><div class="line">  Call&lt;List&lt;Repo&gt;&gt; listRepos(<span class="meta">@Path</span>(<span class="string">"user"</span>) String user);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Retrofit生成一个实现GitHubService接口的实体类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">  .baseUrl(<span class="string">"https://api.github.com/"</span>)</div><div class="line">  .build();</div><div class="line"></div><div class="line">GitHubService service = retrofit.create(GitHubService.class);</div></pre></td></tr></table></figure>
+</li>
+<li><p>再由上述service生成Call对象就可以同步/异步执行HTTP请求了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"octocat"</span>);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上是使用方法的官方介绍(只列出了主要步骤)，下面是我据此实现的一个Demo。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RetrofitDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BASE_URL=<span class="string">"https://api.github.com/"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">        <span class="meta">@GET</span>(<span class="string">"users/&#123;user&#125;/repos"</span>)</div><div class="line">        Call&lt;List&lt;Repo&gt;&gt; listRepos(<span class="meta">@Path</span>(<span class="string">"user"</span>) String user);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Repo</span></span>&#123;</div><div class="line">        <span class="keyword">public</span> String id;</div><div class="line">        <span class="keyword">public</span> String name;</div><div class="line">        <span class="meta">@SerializedName</span>(<span class="string">"full_name"</span>)</div><div class="line">        <span class="keyword">public</span> String fullName;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(BASE_URL)</div><div class="line">                .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                .build();</div><div class="line">        GitHubService service = retrofit.create(GitHubService.class);</div><div class="line">        Call&lt;List&lt;Repo&gt;&gt; repos = service.listRepos(<span class="string">"square"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Response&lt;List&lt;Repo&gt;&gt; response = repos.execute();</div><div class="line">            System.out.println(response.body().size());</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从这个Demo我们就可以看出Retrofit的优越性：</p>
+<ul>
+<li>封装了几乎所有的网络操作，把使用者从大量繁琐且重复的工作中解放出来；</li>
+<li>业务逻辑简洁明了，提高了代码的可读性；</li>
+<li>面向接口编程，提供了高扩展性。</li>
+</ul>
+<h2 id="跟随HTTP请求，洞悉Retrofit的内部世界"><a href="#跟随HTTP请求，洞悉Retrofit的内部世界" class="headerlink" title="跟随HTTP请求，洞悉Retrofit的内部世界"></a>跟随HTTP请求，洞悉Retrofit的内部世界</h2><p>以下内容以上述Demo为样例。</p>
+<p>我们可以看到就是下面的代码执行了HTTP请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">repos.execute()</div></pre></td></tr></table></figure>
+<p>在跟踪execute方法之前，我们先来看一下repos的身世：我们调用GitHubService的接口方法返回了一个Call<list<repo>&gt;对象，即repos。也就是说，这里的service实现了GitHubService接口。相信你看到这里也和我一样，一脸懵。下面我们就看看这个service是怎么生成的，为什么它能够返回一个Call<list<repo>&gt;对象。</list<repo></list<repo></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Retrofit.java 仅展示相关代码</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">create</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; service)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> (T) Proxy.newProxyInstance(service.getClassLoader(), <span class="keyword">new</span> Class&lt;?&gt;[] &#123; service &#125;,</div><div class="line">        <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line"></div><div class="line">          <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">              <span class="keyword">throws</span> Throwable &#123;</div><div class="line">            ...</div><div class="line">            ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">            OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">            <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原来是利用Java Proxy生成了GitHubService的实现类，并生成了该类对应的对象。关于Java Proxy的知识还请自行百度，这里只大概讲一下。</p>
+<p>这个方法的原型是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Object <span class="title">newProxyInstance</span><span class="params">(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span></div></pre></td></tr></table></figure></p>
+<p>动态代理其实就是java.lang.reflect.Proxy类动态地根据指定的接口生成一个class byte，该class会继承Proxy类，并实现所有你指定的接口（您在参数中传入的接口数组）；然后再利用指定的ClassLoader将class byte加载进系统，最后生成这样一个类的对象，并初始化该对象的一些值，如InvocationHandler,以及所有的接口对应的Method成员。 初始化之后将对象返回给调用的客户端。这样客户端拿到的就是一个实现你所有的接口的Proxy对象。</p>
+<p>我们做个简单的总结，Retrofit.create方法生成了GitHubService的代理对象service，service中的所有方法都交由InvocationHandler来处理。也就是说，InvocationHandler.invoke方法形成了一个切面，承载了GitHubService中所有方法的具体实现。</p>
+<p>再来看下InvocationHandler.invoke都做了些什么工作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">    <span class="keyword">throws</span> Throwable &#123;</div><div class="line">  ...</div><div class="line">  ServiceMethod&lt;Object, Object&gt; serviceMethod =</div><div class="line">      (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);</div><div class="line">  OkHttpCall&lt;Object&gt; okHttpCall = <span class="keyword">new</span> OkHttpCall&lt;&gt;(serviceMethod, args);</div><div class="line">  <span class="keyword">return</span> serviceMethod.callAdapter.adapt(okHttpCall);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看明白这里需要具备一点Java反射的知识，如果不太明白还请自行百度。简言之，就是<font color="#ff3131">根据反射获取到GitHubService所声明方法的注解、参数及类型、返回值类型，构造了一个HTTP任务：OkHttpCall</font>。下面是详细讲解，先来看下loadServiceMethod方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//仅展示相关代码</span></div><div class="line"><span class="comment">//Retrofit.java</span></div><div class="line">ServiceMethod&lt;?, ?&gt; loadServiceMethod(Method method) &#123;</div><div class="line">  <span class="comment">// 先在缓存中查找method对应的ServiceMethod</span></div><div class="line">  ServiceMethod&lt;?, ?&gt; result = serviceMethodCache.get(method);</div><div class="line">  <span class="comment">// 已经在缓存中了，直接返回</span></div><div class="line">  <span class="keyword">if</span> (result != <span class="keyword">null</span>) <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">  <span class="keyword">synchronized</span> (serviceMethodCache) &#123;</div><div class="line">    result = serviceMethodCache.get(method);</div><div class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="comment">// 没有在当前的缓存中，以method为参数创建一个ServiceMethod，并放入缓存中</span></div><div class="line">      result = <span class="keyword">new</span> ServiceMethod.Builder&lt;&gt;(<span class="keyword">this</span>, method).build();</div><div class="line">      serviceMethodCache.put(method, result);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"><span class="comment">// ServiceMethod.java</span></div><div class="line"><span class="comment">//建造器模式，把复杂对象的构建独立出来</span></div><div class="line">Builder(Retrofit retrofit, Method method) &#123;</div><div class="line">  <span class="keyword">this</span>.retrofit = retrofit;</div><div class="line">  <span class="keyword">this</span>.method = method;</div><div class="line">  <span class="keyword">this</span>.methodAnnotations = method.getAnnotations();</div><div class="line">  <span class="keyword">this</span>.parameterTypes = method.getGenericParameterTypes();</div><div class="line">  <span class="keyword">this</span>.parameterAnnotationsArray = method.getParameterAnnotations();</div><div class="line">&#125;</div><div class="line"><span class="comment">//开始构建</span></div><div class="line"><span class="function"><span class="keyword">public</span> ServiceMethod <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">/* 生成调用适配器，这里之所以采用适配器模式，是因为Retrofit的Http框架(默认是OKHttp)也是可配的</span></div><div class="line">  */</div><div class="line">  callAdapter = createCallAdapter();</div><div class="line">  <span class="comment">//解析返回值类型</span></div><div class="line">  responseType = callAdapter.responseType();</div><div class="line">  ...</div><div class="line">  <span class="comment">// 用以解析返回数据</span></div><div class="line">  responseConverter = createResponseConverter();</div><div class="line">  <span class="comment">// 解析method的注解，注解里面封装了API信息</span></div><div class="line">  <span class="keyword">for</span> (Annotation annotation : methodAnnotations) &#123;</div><div class="line">    parseMethodAnnotation(annotation);</div><div class="line">  &#125;</div><div class="line">  ...</div><div class="line">  <span class="keyword">int</span> parameterCount = parameterAnnotationsArray.length;</div><div class="line">  parameterHandlers = <span class="keyword">new</span> ParameterHandler&lt;?&gt;[parameterCount];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">0</span>; p &lt; parameterCount; p++) &#123;</div><div class="line">    Type parameterType = parameterTypes[p];</div><div class="line">    ...</div><div class="line">    Annotation[] parameterAnnotations = parameterAnnotationsArray[p];</div><div class="line">    ...</div><div class="line">    <span class="comment">//解析入参</span></div><div class="line">    parameterHandlers[p] = parseParameter(p, parameterType, parameterAnnotations);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//构造ServiceMethod</span></div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ServiceMethod&lt;&gt;(<span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// builder已经准备好了所有需要的信息，ServiceMethod坐享其成</span></div><div class="line">ServiceMethod(Builder&lt;R, T&gt; builder) &#123;</div><div class="line">    <span class="keyword">this</span>.callFactory = builder.retrofit.callFactory();</div><div class="line">    <span class="keyword">this</span>.callAdapter = builder.callAdapter;</div><div class="line">    <span class="keyword">this</span>.baseUrl = builder.retrofit.baseUrl();</div><div class="line">    <span class="keyword">this</span>.responseConverter = builder.responseConverter;</div><div class="line">    <span class="keyword">this</span>.httpMethod = builder.httpMethod;</div><div class="line">    <span class="keyword">this</span>.relativeUrl = builder.relativeUrl;</div><div class="line">    <span class="keyword">this</span>.headers = builder.headers;</div><div class="line">    <span class="keyword">this</span>.contentType = builder.contentType;</div><div class="line">    <span class="keyword">this</span>.hasBody = builder.hasBody;</div><div class="line">    <span class="keyword">this</span>.isFormEncoded = builder.isFormEncoded;</div><div class="line">    <span class="keyword">this</span>.isMultipart = builder.isMultipart;</div><div class="line">    <span class="keyword">this</span>.parameterHandlers = builder.parameterHandlers;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以看到loadServiceMethod方法做了很多工作：提取请求方法POST/GET、提取请求的API、提取请求参数、提取返回参数类型、准备数据解析器。一个HTTP请求所需要的要素都已经具备了。</p>
+<p>继续看OkHttpCall的构造方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpCall(ServiceMethod&lt;T, ?&gt; serviceMethod, Object[] args) &#123;</div><div class="line">  <span class="comment">/*持有ServiceMethod，从这里看ServiceMethod更像是数据单元，封装了网络请求的具体参数;而OkHttpCall则封装了HTTP任务*/</span></div><div class="line">  <span class="keyword">this</span>.serviceMethod = serviceMethod;</div><div class="line">  <span class="keyword">this</span>.args = args;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>继续看serviceMethod.callAdapter.adapt(okHttpCall)，之前loadServiceMethod执行时，已经创建了callAdapter。样例中的callAdapter就是Retrofit默认的，如果你在初始化Retrofit是配置了CallAdapter.Factory，那么Retrofit就会调用你所配置的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultCallAdapterFactory</span> <span class="keyword">extends</span> <span class="title">CallAdapter</span>.<span class="title">Factory</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">final</span> CallAdapter.Factory INSTANCE = <span class="keyword">new</span> DefaultCallAdapterFactory();</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="keyword">public</span> CallAdapter&lt;?, ?&gt; get(Type returnType, Annotation[] annotations, Retrofit retrofit) &#123;</div><div class="line">    <span class="keyword">if</span> (getRawType(returnType) != Call.class) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> Type responseType = Utils.getCallResponseType(returnType);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CallAdapter&lt;Object, Call&lt;?&gt;&gt;() &#123;</div><div class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Type <span class="title">responseType</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> responseType;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Call&lt;Object&gt; <span class="title">adapt</span><span class="params">(Call&lt;Object&gt; call)</span> </span>&#123;</div><div class="line">        <span class="comment">// 使用DefaultCallAdapterFactory仅仅是把OkHttpCall转发出去</span></div><div class="line">        <span class="keyword">return</span> call;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>综上分析，InvocationHandler.invoke方法根据所调用接口方法的注解、返回值类型、参数类型及参数构造了一个HTTP任务，即OkHttpCall。</p>
+<p>然后再回到最初调用repos.execute，其实就是对OkHttpCall.execute的调用了，这里比较简单，不再展开讲了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/Retrofit详解/" data-id="cj0uytlg9000jawjh9f4c99v7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-android图文混排" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/android图文混排/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/android图文混排/">Android图文混排</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>图文混排</code>顾名思义就是把文字和图片混合排列在一起，比较简单的需求我们也可以通过TextView和ImageView配合使用来达到目的，但是遇到稍微复杂一些的情况这种方法就不适用了。</p>
+<p>做这样一个按钮：<br><img src="../assets/mix_1.png"></p>
+<p>对于你来说没有任何难度：LinearLayout＋TextView＋ImageView搞定；或者可以直接使用TextView的drawableLeft属性。</p>
+<p>这里记录两种复杂情况的处理方法：</p>
+<ol>
+<li>为<code>部分文字</code>添加点击事件；</li>
+<li>图文混排,图片居中，图片可点击。</li>
+</ol>
+<h2 id="1-为部分文字添加点击事件"><a href="#1-为部分文字添加点击事件" class="headerlink" title="1. 为部分文字添加点击事件"></a>1. 为部分文字添加点击事件</h2><p>我最终实现的效果是这个样子的：</p>
+<p><img src="../assets/mix_2.png" width="360/"></p>
+<p>可点击文字显示为特殊颜色，并可以点击。个人觉得这个最大的特色就是可以像普通文本一样换行，这是组合控件所不能实现的。</p>
+<p>这里使用了SpannableString和ClickableSpan实现，具体代码如下：</p>
+<p>ClickSpan继承自ClickableSpan：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> android.text.TextPaint;</div><div class="line"><span class="keyword">import</span> android.text.style.ClickableSpan;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.travis.uqmei.utils.ToastUtil;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by travis on 16/9/18.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClickSpan</span> <span class="keyword">extends</span> <span class="title">ClickableSpan</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String txt;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClickSpan</span><span class="params">(String txt)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.txt = txt;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View widget)</span> </span>&#123;</div><div class="line">        String content = String.format(<span class="string">"ClickSpan is clicked, and txt is %s "</span>,txt);</div><div class="line">        ToastUtil.show(content);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateDrawState</span><span class="params">(TextPaint ds)</span> </span>&#123;</div><div class="line">        <span class="comment">//根据自己的需求定制文本的样式</span></div><div class="line">        ds.setColor(ds.linkColor);</div><div class="line">        ds.setUnderlineText(<span class="keyword">false</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为TextView设置部分文字可点击效果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">TextView tv = (TextView) findViewById(R.id.tv);</div><div class="line"></div><div class="line">String from = <span class="string">"张全蛋"</span>;</div><div class="line">String to = <span class="string">"赵铁柱"</span>;</div><div class="line">String txt = String.format(<span class="string">"%s回复@%s:我是富士康3号流水线的张全蛋，"</span> +</div><div class="line">      <span class="string">"英文名叫Micheal Jack，发文名叫helodie Jaqueline。"</span>, from, to);</div><div class="line"></div><div class="line">SpannableString span = <span class="keyword">new</span> SpannableString(txt);</div><div class="line">ClickSpan clickSpan = <span class="keyword">new</span> ClickSpan(to);</div><div class="line">span.setSpan(clickSpan, txt.indexOf(to),</div><div class="line">        txt.indexOf(to) + to.length(),</div><div class="line">        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);</div><div class="line">tv.setText(span);</div><div class="line">tv.setMovementMethod(LinkMovementMethod</div><div class="line">        .getInstance());</div></pre></td></tr></table></figure></p>
+<h2 id="2-图文混排，图片居中，图片可点击"><a href="#2-图文混排，图片居中，图片可点击" class="headerlink" title="2. 图文混排，图片居中，图片可点击"></a>2. 图文混排，图片居中，图片可点击</h2><p>效果如下：</p>
+<p><img src="../assets/mix_3.png" width="360/"></p>
+<p>可点击效果通过上述ClickSpan实现，图文混排通过VerticalImageSapn实现。</p>
+<p>VerticalImageSpan继承自ImageSpan：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> android.graphics.Canvas;</div><div class="line"><span class="keyword">import</span> android.graphics.Paint;</div><div class="line"><span class="keyword">import</span> android.graphics.Rect;</div><div class="line"><span class="keyword">import</span> android.graphics.drawable.Drawable;</div><div class="line"><span class="keyword">import</span> android.text.style.ImageSpan;</div><div class="line"></div><div class="line">   <span class="comment">/**</span></div><div class="line">     * 垂直居中的ImageSpan</div><div class="line">     *</div><div class="line">     * <span class="doctag">@author</span> travis</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VerticalImageSpan</span> <span class="keyword">extends</span> <span class="title">ImageSpan</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">VerticalImageSpan</span><span class="params">(Drawable drawable)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(drawable);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">(Paint paint, CharSequence text, <span class="keyword">int</span> start, <span class="keyword">int</span> end,</span></span></div><div class="line">                           Paint.FontMetricsInt fontMetricsInt) &#123;</div><div class="line">            Drawable drawable = getDrawable();</div><div class="line">            Rect rect = drawable.getBounds();</div><div class="line">            <span class="keyword">if</span> (fontMetricsInt != <span class="keyword">null</span>) &#123;</div><div class="line">                Paint.FontMetricsInt fmPaint = paint.getFontMetricsInt();</div><div class="line">                <span class="keyword">int</span> fontHeight = fmPaint.bottom - fmPaint.top;</div><div class="line">                <span class="keyword">int</span> drHeight = rect.bottom - rect.top;</div><div class="line"></div><div class="line">                <span class="keyword">int</span> top = drHeight / <span class="number">2</span> - fontHeight / <span class="number">4</span>;</div><div class="line">                <span class="keyword">int</span> bottom = drHeight / <span class="number">2</span> + fontHeight / <span class="number">4</span>;</div><div class="line"></div><div class="line">                fontMetricsInt.ascent = -bottom;</div><div class="line">                fontMetricsInt.top = -bottom;</div><div class="line">                fontMetricsInt.bottom = top;</div><div class="line">                fontMetricsInt.descent = top;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> rect.right;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">(Canvas canvas, CharSequence text, <span class="keyword">int</span> start, <span class="keyword">int</span> end,</span></span></div><div class="line">                         <span class="keyword">float</span> x, <span class="keyword">int</span> top, <span class="keyword">int</span> y, <span class="keyword">int</span> bottom, Paint paint) &#123;</div><div class="line">            Drawable drawable = getDrawable();</div><div class="line">            canvas.save();</div><div class="line">            <span class="keyword">int</span> transY = <span class="number">0</span>;</div><div class="line">            transY = ((bottom - top) - drawable.getBounds().bottom) / <span class="number">2</span> + top;</div><div class="line">            canvas.translate(x, transY);</div><div class="line">            drawable.draw(canvas);</div><div class="line">            canvas.restore();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>代码设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">TextView tv = (TextView) findViewById(R.id.tv);</div><div class="line"></div><div class="line">        String icon = <span class="string">"icon"</span>;</div><div class="line">        String from = <span class="string">"张全蛋"</span>+icon;</div><div class="line">        String to = <span class="string">"赵铁柱"</span>;</div><div class="line">        String txt = String.format(<span class="string">"%s回复@%s:我是富士康3号流水线的张全蛋，"</span> +</div><div class="line">                <span class="string">"英文名叫Micheal Jack，发文名叫helodie Jaqueline。"</span>, from, to);</div><div class="line"></div><div class="line">        <span class="comment">//设置ClickSpan,为部分文字("icon")添加点击效果</span></div><div class="line">        SpannableString span = <span class="keyword">new</span> SpannableString(txt);</div><div class="line">        ClickSpan clickSpan = <span class="keyword">new</span> ClickSpan(icon);</div><div class="line">        span.setSpan(clickSpan, txt.indexOf(icon),</div><div class="line">                txt.indexOf(icon) + icon.length(),</div><div class="line">                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);</div><div class="line"></div><div class="line">        <span class="comment">//设置ImageSpan,占用可点击文字("icon")的位置</span></div><div class="line">        Bitmap bitmap = ImageUtils.resize(BitmapFactory.decodeResource(getResources(),</div><div class="line">                R.mipmap.uqmei_icon_contact), DensityUtil.sp2px(<span class="keyword">this</span>, <span class="number">12f</span>));</div><div class="line">        BitmapDrawable drawable = <span class="keyword">new</span> BitmapDrawable(bitmap);</div><div class="line">        drawable.setBounds(<span class="number">0</span>, <span class="number">0</span>, bitmap.getWidth(), bitmap.getHeight());</div><div class="line">        span.setSpan(<span class="keyword">new</span> VerticalImageSpan(drawable),</div><div class="line">                txt.indexOf(icon), txt.indexOf(icon) + icon.length(),</div><div class="line">                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);</div><div class="line"></div><div class="line">        <span class="comment">//设置TextView</span></div><div class="line">        tv.setText(span);</div><div class="line">        tv.setHighlightColor(Color.TRANSPARENT);<span class="comment">//消除点击时的背景色</span></div><div class="line">        tv.setMovementMethod(LinkMovementMethod.getInstance());</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/android图文混排/" data-id="cj0uytlga000kawjh6x6p8nx9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ViewPager+Fragments+LazyLoad" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/ViewPager+Fragments+LazyLoad/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/ViewPager+Fragments+LazyLoad/">ViewPager+Fragments+LazyLoad</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ViewPager+Fragments可以帮助Android开发者方便地实现多个tab页之间的切换。可是在使用中你有没有遇到过一些不是那么美丽的状况呢？比方说，进入页面的前几秒钟特别卡顿？从别的页面切换回来，竟然重新加载了页面？从网上Copy了LazyLoad代码下来，来回切换了几次崩溃了？WTF！！！ViewPager+Fragments用起来并不复杂，不消十分钟你就可以把它引入项目，但是要想获得好的体验，就要多花一点功夫了。这篇文章，我就记录一下自己在开发过程中使用到的优化方法。</p>
+<p>##LazyLoad</p>
+<p>首先我们来复习一下ViewPager的基础知识(使用FragmentAdapter)。ViewPager默认至多预加载2个Fragment(可见页面称为VisibleFragment，可见页面左右各一个InvisibleFragment)，至少预加载一个页面(可见页面是第一个，仅在右侧有一个InvisibleFragment)。也就是说，我们第一次进入页面时，ViewPager至少加载了两个Fragment，一个VisibleFragment，一个InvisibleFragment。如果InvisibleFragment有什么耗时操作，就会连累VisibleFragment特别卡顿。</p>
+<p>聪明如你肯定会想，这个问题so easy，调用一下<code>ViewPager.setOffscreenPageLimit(0)</code>，禁止ViewPager预加载不就ok了嘛！naive！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOffscreenPageLimit</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (limit &lt; DEFAULT_OFFSCREEN_PAGES) &#123;</div><div class="line">          Log.w(TAG, <span class="string">"Requested offscreen page limit "</span> + limit + <span class="string">" too small; defaulting to "</span> +</div><div class="line">                  DEFAULT_OFFSCREEN_PAGES);</div><div class="line">          limit = DEFAULT_OFFSCREEN_PAGES;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (limit != mOffscreenPageLimit) &#123;</div><div class="line">          mOffscreenPageLimit = limit;</div><div class="line">          populate();</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>从<code>ViewPager.setOffscreenPageLimit(int limit)</code>方法的源码，可以看到预加载页面至少是<code>DEFAULT_OFFSCREEN_PAGES</code>,这个值是1。</p>
+<p>你可能又会想了，<font color="#ff3131">InvisibleFragment页面从不可见转为可见，这个状态肯定能够捕捉到吧，在页面变为可见的时候执行耗时操作不就可以了嘛</font>！对头！！！这个方法就是Fragment.setUserVisibleHint(boolean isVisibleToUser),一旦Fragment可见状态发生变化，这个方法就会被调用。所以我们就可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 是否已加载数据</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mLoaded = <span class="keyword">false</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一旦页面可见性发生变化，这个方法就会被调用</div><div class="line"> * 当页面可见且数据未加载时，加载数据</div><div class="line"> * <span class="doctag">@param</span> isVisibleToUser</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserVisibleHint</span><span class="params">(<span class="keyword">boolean</span> isVisibleToUser)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser);</div><div class="line">    <span class="keyword">if</span> (isVisibleToUser &amp;&amp; !mLoaded) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;</div><div class="line">        loadData();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个就是所谓的LazyLoad！</p>
+<p>学到上面的新技能之后你兴冲冲地去实验，编码&gt;&gt;运行&gt;&gt;不错呀！写博客的小哥没骗我！&gt;&gt;纳尼！崩溃了！这个死骗子，肯定拿假的LazyLoad来骗我，看我不骂死他！看官大爷请息怒！我真没骗你，不信咱们接着往下看！</p>
+<p>这个地方的崩溃应该是NullPointerException，提示在View初始化之前即对其进行了操作。看来setUserVisibleHint()方法被调用时，onCreateView()方法还没有被调用。要解决这个问题我们要首先弄清楚Fragment中相关方法被调用的顺序(你可以在自己项目中把方法的调用都打印出来)。</p>
+<p>然后我们发现Fragment中相关方法的调用顺序是这个样子的：<br>setUserVisibleHint()&gt;&gt;onCreateView()&gt;&gt;onActivityCreated()。</p>
+<p>setUserVisibleHint()确实是在onCreateView()之前被调用的，这可怎么办呀？表怂呀！这还能难得住你？添加一个全局变量，标识onCreateView()方法是否被调用，如果没有被调用，setUserVisibleHint()不执行加载数据的操作。然后我们还需要在onActivityCreated()里面二次判断是否首次加载。现在代码长这个样子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * onCreateView()是否被调用</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mOnCreateViewInvoked = <span class="keyword">false</span>;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 是否已加载数据</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> mLoaded = <span class="keyword">false</span>;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一旦页面可见性发生变化，这个方法就会被调用</div><div class="line"> * 当onCreateView()已经被调用&amp;&amp;页面可见&amp;&amp;数据未加载时，加载数据</div><div class="line"> * <span class="doctag">@param</span> isVisibleToUser</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserVisibleHint</span><span class="params">(<span class="keyword">boolean</span> isVisibleToUser)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser);</div><div class="line">    <span class="keyword">if</span> (mOnCreateViewInvoked &amp;&amp; isVisibleToUser &amp;&amp; !mLoaded) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;</div><div class="line">        loadData();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Nullable</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    mOnCreateViewInvoked = <span class="keyword">true</span>;</div><div class="line">    <span class="comment">// your code</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 二次测试是否首次加载</div><div class="line"> * <span class="doctag">@param</span> savedInstanceState</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onActivityCreated</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onActivityCreated(savedInstanceState);</div><div class="line">    <span class="keyword">if</span> (getUserVisibleHint() &amp;&amp; !mLoaded) &#123;</div><div class="line">        mLoaded = <span class="keyword">true</span>;</div><div class="line">        loadData();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你再试试，现在是不是不崩溃了！我跟你讲了，我写的是真的LazyLoad！</p>
+<p>刷了一会儿你又发现问题了，从别的页面返回之后咋又重新加载数据了？在tab页中，我们可能并不希望，页面每次可见的时候数据都重新加载一遍，而是只在第一次可见的时候加载。看官大爷您这个需求比较简单，只需要一行代码就可以搞定了。我们只需要在ViewPager初始化的时候添加一行设置ViewPager.setOffscreenPageLimit(sizeOfFragments)。这样ViewPager中所有的Framgment都不会被回收了，陪你到天荒地老！</p>
+<p>接下来写一篇文章介绍一下两个ViewPager嵌套时，Fragment可见性的判断。</p>
+<p>完！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/ViewPager+Fragments+LazyLoad/" data-id="cj0uytlgc000lawjhmyjwvik0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-自定义圆角图片控件&lt;Xfermode方式&gt;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/自定义圆角图片控件<Xfermode方式>/">自定义圆角图片控件(Xfermode方式)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>苹果都放弃自己的棱角了。。。</p>
+<p>看惯了方方正正的图片，乍一看到圆角图片觉得挺漂亮的。可当满世界都是圆角图片的时候，我又开始怀念那些棱角了~之前仓促的写过一个，今天拿过来又修改了一下，现在贴在这里，以方便以后ctrl+c、ctrl+v<del>~</del></p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>自定义一个图片控件，有圆形和圆角两种选择。控件的行为和ImageView一致！</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>扩展ImageView控件，重写其onDraw方法。一开始还想重写onMeasure方法，如果显示圆形图片强制宽高相等，没能行得通（代码中会说明）。圆角图片以Xfermode方式实现，关于这个知识点大家可以参考这篇文章《setXfermode属性》。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>控件类RoundImageView：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 圆角或者圆形图片控件扩展自ImageView&lt;br/&gt;</div><div class="line"> * 说明：&lt;br/&gt;</div><div class="line"> * 1.仅重写了绘制流程，即onDraw()方法&lt;br/&gt;</div><div class="line"> * 2.如果使用圆形图片需要设置固定的尺寸</div><div class="line"> * 3.支持普通、圆形、圆角三种样式</div><div class="line"> * 4.可设置圆角半径  默认是10dp</div><div class="line"> * 5.无法为背景添加圆角</div><div class="line"> * Created by 95 on 2016/1/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundImageView</span> <span class="keyword">extends</span> <span class="title">ImageView</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = RoundImageView.class.getSimpleName();</div><div class="line">    <span class="keyword">private</span> Paint mPaint;</div><div class="line">    <span class="keyword">private</span> WeakReference&lt;Bitmap&gt; mWeakBitmap;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 图片的类型，圆形or圆角</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> type;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_NORMAL = <span class="number">0</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_CIRCLE = <span class="number">1</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_ROUND = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 圆角大小的默认值</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_RADIUS = <span class="number">10</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 圆角的大小</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mRadius;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundImageView</span><span class="params">(Context context)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundImageView</span><span class="params">(Context context, AttributeSet attrs)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line"></div><div class="line">        mPaint = <span class="keyword">new</span> Paint();</div><div class="line">        mPaint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView);</div><div class="line"></div><div class="line">        mRadius = a.getDimensionPixelSize(R.styleable.RoundImageView_radius, (<span class="keyword">int</span>) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_RADIUS, getResources().getDisplayMetrics()));<span class="comment">// 默认为10dp</span></div><div class="line">        type = a.getInt(R.styleable.RoundImageView_type, TYPE_NORMAL);<span class="comment">// 默认为normal</span></div><div class="line">        a.recycle();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 如果类型是圆形，则强制改变view的宽高一致，以小值为准</div><div class="line">         * 这种写法是有问题的</div><div class="line">         * 我们本来是想在正常测量的基础上取最短边</div><div class="line">         * 可下面的操作插入到了正常执行的流程当中   致使最终的结果出了问题</div><div class="line">         */</div><div class="line">        <span class="comment">//        if (type == TYPE_CIRCLE)</span></div><div class="line">        <span class="comment">//        &#123;</span></div><div class="line">        <span class="comment">//            int min = Math.min(getMeasuredWidth(), getMeasuredHeight());</span></div><div class="line">        <span class="comment">//            setMeasuredDimension(min, min);</span></div><div class="line">        <span class="comment">//        &#125;</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//普通模式  调用原生的绘制方法</span></div><div class="line">        <span class="keyword">if</span> (type == TYPE_NORMAL)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果当前未设置图片  直接返回</span></div><div class="line">        <span class="keyword">if</span> (getDrawable() == <span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        <span class="comment">//在缓存中取出bitmap</span></div><div class="line">        Bitmap bitmap = mWeakBitmap == <span class="keyword">null</span> ? <span class="keyword">null</span> : mWeakBitmap.get();</div><div class="line">        <span class="comment">//如果bitmap已经被回收，就重新创建</span></div><div class="line">        <span class="keyword">if</span> (bitmap == <span class="keyword">null</span> || bitmap.isRecycled())</div><div class="line">        &#123;</div><div class="line">            bitmap = createDesiredBitmap(drawableToBitmap(getDrawable()), type, getMeasuredWidth(), getMeasuredHeight(), mRadius);</div><div class="line">            mWeakBitmap = <span class="keyword">new</span> WeakReference&lt;Bitmap&gt;(bitmap);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//以为我们所有的绘制使用了同一个Paint  所以每次使用之前都要考虑这个状态</span></div><div class="line">        mPaint.setXfermode(<span class="keyword">null</span>);</div><div class="line">        <span class="comment">//把最终结果绘制到画布上</span></div><div class="line">        canvas.drawBitmap(bitmap, <span class="number">0.0f</span>, <span class="number">0.0f</span>, mPaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 生成圆角图片 使用Xfermode方式</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> src           原图</div><div class="line">     * <span class="doctag">@param</span> type          round or circle</div><div class="line">     * <span class="doctag">@param</span> desiredWidth  控件的宽</div><div class="line">     * <span class="doctag">@param</span> desiredHeight 控件的高</div><div class="line">     * <span class="doctag">@param</span> radius        圆角半径</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">createDesiredBitmap</span><span class="params">(Bitmap src, <span class="keyword">int</span> type, <span class="keyword">int</span> desiredWidth, <span class="keyword">int</span> desiredHeight, <span class="keyword">int</span> radius)</span></span></div><div class="line">    &#123;</div><div class="line">        Bitmap target = Bitmap.createBitmap(desiredWidth, desiredHeight, Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(target);</div><div class="line">        mPaint.setXfermode(<span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (TYPE_CIRCLE == type)</div><div class="line">        &#123;</div><div class="line">            canvas.drawCircle(desiredWidth * <span class="number">1.0f</span> / <span class="number">2</span>, desiredWidth * <span class="number">1.0f</span> / <span class="number">2</span>, desiredWidth * <span class="number">1.0f</span> / <span class="number">2</span>, mPaint);</div><div class="line">        &#125; <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            RectF rectF = <span class="keyword">new</span> RectF(<span class="number">0.0f</span>, <span class="number">0.0f</span>, desiredWidth, desiredHeight);</div><div class="line">            canvas.drawRoundRect(rectF, radius * <span class="number">1.0f</span>, radius * <span class="number">1.0f</span>, mPaint);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//缩放比例  保证图片的宽和高大于控件的宽和高</span></div><div class="line">        <span class="keyword">float</span> ratio = Math.max(desiredWidth * <span class="number">1.0f</span> / src.getWidth(), desiredHeight * <span class="number">1.0f</span> / src.getHeight());</div><div class="line">        Bitmap tem = getScaledBitmap(src, ratio);</div><div class="line">        <span class="comment">//设置Xfermode</span></div><div class="line">        mPaint.setXfermode(<span class="keyword">new</span> PorterDuffXfermode(PorterDuff.Mode.SRC_IN));</div><div class="line">        <span class="comment">//保证控件展示的位置即为图片正中间的内容</span></div><div class="line">        canvas.drawBitmap(tem, (desiredWidth - tem.getWidth()) * <span class="number">1.0f</span> / <span class="number">2</span>, (desiredHeight - tem.getHeight()) * <span class="number">1.0f</span> / <span class="number">2</span>, mPaint);</div><div class="line">        <span class="comment">//释放内存</span></div><div class="line">        tem.recycle();</div><div class="line">        <span class="keyword">return</span> target;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 缩放图片</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> src   原图</div><div class="line">     * <span class="doctag">@param</span> ratio 缩放比例</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">getScaledBitmap</span><span class="params">(Bitmap src, <span class="keyword">float</span> ratio)</span></span></div><div class="line">    &#123;</div><div class="line">        Matrix matrix = <span class="keyword">new</span> Matrix();</div><div class="line">        matrix.setScale(ratio, ratio, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</div><div class="line">        Bitmap target = Bitmap.createBitmap((<span class="keyword">int</span>) (src.getWidth() * ratio), (<span class="keyword">int</span>) (src.getHeight() * ratio), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(target);</div><div class="line">        canvas.drawBitmap(src, matrix, mPaint);</div><div class="line">        <span class="keyword">return</span> target;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * drawable 转 bitmap</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> drawable</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> Bitmap <span class="title">drawableToBitmap</span><span class="params">(Drawable drawable)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (drawable <span class="keyword">instanceof</span> BitmapDrawable)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> ((BitmapDrawable) drawable).getBitmap();</div><div class="line">        &#125;</div><div class="line">        Bitmap target = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(target);</div><div class="line">        drawable.setBounds(<span class="number">0</span>, <span class="number">0</span>, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());</div><div class="line">        drawable.draw(canvas);</div><div class="line">        <span class="keyword">return</span> target;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自定义属性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"RoundImageView"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"type"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"normal"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"circle"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"round"</span> <span class="attr">value</span>=<span class="string">"2"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">attr</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"radius"</span> <span class="attr">format</span>=<span class="string">"dimension"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>直接在布局文件当中使用：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:gravity</span>=<span class="string">"center_horizontal"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--原图--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--圆角效果，圆角半径是15dp--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"80dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"80dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span></div><div class="line">        <span class="attr">app:radius</span>=<span class="string">"15dp"</span></div><div class="line">        <span class="attr">app:type</span>=<span class="string">"round"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--非正方形圆角效果，圆角半径60dp--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"120dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"80dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span></div><div class="line">        <span class="attr">app:radius</span>=<span class="string">"60dp"</span></div><div class="line">        <span class="attr">app:type</span>=<span class="string">"round"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--圆形效果--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.hsji.testptr.widget.RoundImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"120dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"120dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/lena"</span></div><div class="line">        <span class="attr">app:type</span>=<span class="string">"circle"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>下面是效果图：<br><br><img src="../assets/round.png" width="300/"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/自定义圆角图片控件<Xfermode方式>/" data-id="cj0uytlgi000qawjhg6801jd6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-后台应用被系统回收后重启" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/后台应用被系统回收后重启/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/后台应用被系统回收后重启/">后台应用被系统回收后重启</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果系统内存不足、或者切换横竖屏、或者App长时间在后台运行，Activity都可能被系统回收，然后Frament并不会随着Activity<br>的回收而被回收，从而导致Fragment丢失了对应的Activity。</p>
+<p>原来Activity切换到后台之后，由于系统内存不够，Activity被系统回收了，一段时间之后回到应用程序，Activity被重新实例化了。而Activity被系统销毁时，附属在该Activity的Fragment并没有被销毁，在Activity的onSaveInstanceState里面将Fragment的状态保存起来了，所以Activity重新创建了，但是Fragment还是之前的，他们持有的Activity已经被系统回收了。</p>
+<p>解决方法：<br>在基类中重写onSaveInstanceState方法，并且注释掉super.onSaveInstanceState(outState)就可以了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/后台应用被系统回收后重启/" data-id="cj0uytlgf000nawjhvi6qo8hz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/Java动态代理Proxy/">Java动态代理Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/PhotoView使用过程中遇到的坑/">PhotoView使用过程中的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Looper和Handler类/">Looper和Handler类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android布局文件中的onClick属性/">Android布局文件中的onClick属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用内开新进程的一些行为记录/">Android应用内开新进程的一些行为记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Travis<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

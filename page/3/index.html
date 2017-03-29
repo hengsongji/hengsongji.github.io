@@ -3,48 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>状态栏背景图片可滑动 | Travis&#39;s Blog</title>
+  <title>Travis&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考文章：《Android 开发：Translucent System Bar 的最佳实践》
-关于透明状态栏仔细看了上面文章中的实现，发现不能完全满足项目需求，于是在上面项目的基础上做了一些修改，效果描述如下：
-
-图片（非背景图）占用StatusBar显示
-图片可以随页面滑动
-ActionBar和StatusBar随滑动距离透明度渐变
-仅支持 API&amp;gt;19
-
-静态效果：动态效果：
-原理在AP">
-<meta property="og:type" content="article">
-<meta property="og:title" content="状态栏背景图片可滑动">
-<meta property="og:url" content="http://yoursite.com/2017/03/27/状态栏背景图片可滑动/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Travis's Blog">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="Travis's Blog">
-<meta property="og:description" content="参考文章：《Android 开发：Translucent System Bar 的最佳实践》
-关于透明状态栏仔细看了上面文章中的实现，发现不能完全满足项目需求，于是在上面项目的基础上做了一些修改，效果描述如下：
-
-图片（非背景图）占用StatusBar显示
-图片可以随页面滑动
-ActionBar和StatusBar随滑动距离透明度渐变
-仅支持 API&amp;gt;19
-
-静态效果：动态效果：
-原理在AP">
-<meta property="og:image" content="http://7xvpu1.com1.z0.glb.clouddn.com/render-status-static.png">
-<meta property="og:image" content="http://yoursite.com/../assets/transparent_effect.gif">
-<meta property="og:updated_time" content="2017-03-28T16:33:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="状态栏背景图片可滑动">
-<meta name="twitter:description" content="参考文章：《Android 开发：Translucent System Bar 的最佳实践》
-关于透明状态栏仔细看了上面文章中的实现，发现不能完全满足项目需求，于是在上面项目的基础上做了一些修改，效果描述如下：
-
-图片（非背景图）占用StatusBar显示
-图片可以随页面滑动
-ActionBar和StatusBar随滑动距离透明度渐变
-仅支持 API&amp;gt;19
-
-静态效果：动态效果：
-原理在AP">
-<meta name="twitter:image" content="http://7xvpu1.com1.z0.glb.clouddn.com/render-status-static.png">
+<meta name="twitter:title" content="Travis's Blog">
   
     <link rel="alternate" href="/atom.xml" title="Travis&#39;s Blog" type="application/atom+xml">
   
@@ -93,7 +59,51 @@ ActionBar和StatusBar随滑动距离透明度渐变
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-状态栏背景图片可滑动" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-如何调试多文件上传" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/如何调试多文件上传/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/如何调试多文件上传/">如何调试多文件上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="服务器如何设置？"><a href="#服务器如何设置？" class="headerlink" title="服务器如何设置？"></a>服务器如何设置？</h2><p>我调试的时候使用的是PHP服务器，只写一句话：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print_r($_FILES);</div></pre></td></tr></table></figure>
+<h2 id="App端如何设置？"><a href="#App端如何设置？" class="headerlink" title="App端如何设置？"></a>App端如何设置？</h2><p>客户端直接使用的是[okhttputils][1]，上传代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">OkHttpUtils.post()</div><div class="line">    .url(<span class="string">"http://192.168.1.28/demo/index.php"</span>)</div><div class="line">    .addFile(<span class="string">"file[]"</span>, paths.get(<span class="number">0</span>).substring(paths.get(<span class="number">0</span>).indexOf(<span class="string">"/"</span>)), <span class="keyword">new</span> File(paths.get(<span class="number">0</span>)))</div><div class="line">    .addFile(<span class="string">"file[]"</span>, paths.get(<span class="number">1</span>).substring(paths.get(<span class="number">1</span>).indexOf(<span class="string">"/"</span>)), <span class="keyword">new</span> File(paths.get(<span class="number">1</span>)))</div><div class="line">    .build()</div><div class="line">    .execute(<span class="keyword">new</span> StringCallback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Call call, Exception e, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(String response, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">            Log.d(<span class="string">"MainActivity"</span>, <span class="string">"response="</span> + response);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"> * Try to return the absolute file path from the given Uri</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> context</div><div class="line"> * <span class="doctag">@param</span> uri</div><div class="line"> * <span class="doctag">@return</span> the file path or null</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRealFilePath</span><span class="params">(<span class="keyword">final</span> Context context, <span class="keyword">final</span> Uri uri)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == uri) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">final</span> String scheme = uri.getScheme();</div><div class="line">    String data = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">if</span> (scheme == <span class="keyword">null</span>)</div><div class="line">        data = uri.getPath();</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (ContentResolver.SCHEME_FILE.equals(scheme)) &#123;</div><div class="line">        data = uri.getPath();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ContentResolver.SCHEME_CONTENT.equals(scheme)) &#123;</div><div class="line">        Cursor cursor = context.getContentResolver().query(uri, <span class="keyword">new</span> String[]&#123;MediaStore.Images.ImageColumns.DATA&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != cursor) &#123;</div><div class="line">            <span class="keyword">if</span> (cursor.moveToFirst()) &#123;</div><div class="line">                <span class="keyword">int</span> index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);</div><div class="line">                <span class="keyword">if</span> (index &gt; -<span class="number">1</span>) &#123;</div><div class="line">                    data = cursor.getString(index);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            cursor.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> data;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="联调："><a href="#联调：" class="headerlink" title="联调："></a>联调：</h2><p>如果得到以下返回则说明成功了</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">Array</div><div class="line">(</div><div class="line">  [file] =&gt; Array</div><div class="line">         (</div><div class="line">           [name] =&gt; Array</div><div class="line">                  (</div><div class="line">                    [0] =&gt; IMG_20161017_112752.jpg</div><div class="line">                    [1] =&gt; img-c6d422f96853ea6e7d73837b23d5fa3c.jpg</div><div class="line">                  )</div><div class="line"></div><div class="line">            [type] =&gt; Array</div><div class="line">                  (</div><div class="line">                     [0] =&gt;</div><div class="line">                     [1] =&gt; image/jpeg</div><div class="line">                  )</div><div class="line">            [tmp_name] =&gt; Array</div><div class="line">                      (</div><div class="line">                        [0] =&gt;</div><div class="line">                        [1] =&gt; D:\xampp\tmp\php65FE.tmp</div><div class="line">                      )</div><div class="line">            [error] =&gt; Array</div><div class="line">                      (</div><div class="line">                        [0] =&gt; 1</div><div class="line">                        [1] =&gt; 0</div><div class="line">                       )</div><div class="line">            [size] =&gt; Array</div><div class="line">                      (</div><div class="line">                         [0] =&gt; 0</div><div class="line">                         [1] =&gt; 50318</div><div class="line">                      )</div><div class="line">            )</div><div class="line">)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/如何调试多文件上传/" data-id="cj0uytlgg000oawjhh522mr0s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-状态栏背景图片可滑动" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/27/状态栏背景图片可滑动/" class="article-date">
   <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
@@ -106,8 +116,8 @@ ActionBar和StatusBar随滑动距离透明度渐变
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      状态栏背景图片可滑动
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/状态栏背景图片可滑动/">状态栏背景图片可滑动</a>
     </h1>
   
 
@@ -141,29 +151,110 @@ ActionBar和StatusBar随滑动距离透明度渐变
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2017/03/27/如何调试多文件上传/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          如何调试多文件上传
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/03/27/这个字段到底有没有返回/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">这个字段到底有没有返回</div>
-    </a>
-  
-</nav>
+</article>
 
+
+  
+    <article id="post-这个字段到底有没有返回" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/这个字段到底有没有返回/" class="article-date">
+  <time datetime="2017-03-27T07:46:30.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/这个字段到底有没有返回/">这个字段到底有没有返回</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开发过程中总是会遇到诸如题目中的问题，前后端各执一词，有时不惜为此争得脸红脖子粗。这里记录一下，工作中我是怎么处理这些问题的，大家慎重参考，学艺不精被打脸，跟本人无关。</p>
+<p>这篇文章主要讲这么几个方面：1.服务端到底有没有返回某个字段？2.客户端到底有没有传某个字段到服务端？3.服务端要求传数组，可是Http请求里面的数组是个什么鬼？各位乘客请系好安全带，马上就要发车了！</p>
+<h2 id="1-服务端到底有没有返回某个字段？"><a href="#1-服务端到底有没有返回某个字段？" class="headerlink" title="1. 服务端到底有没有返回某个字段？"></a>1. 服务端到底有没有返回某个字段？</h2><p>核心思想就一句话：<code>重新请求，重新返回</code>。</p>
+<p>我好想听见有人说:”我裤子都脱了，你给我看这个?”。这位乘客别生气，且容我慢慢道来。你可以在Android Monitor里面把返回的数据输出一下，然后把CTRL+C/V转发给服务端的同学。But！服务端的同学就开始跟你怼：”我返回的数据没有问题呀”；”你本地是不是加了缓存”；”你调错接口了吧”…Shut Up！即使你把他说服了，你还得配合他联调，绳命是剁么的回晃，绳命是入刺的井猜，哪能浪费在这些事情上。</p>
+<p>我们的目标是重新构造一个请求，然后重放一下。为了构造这个请求，我们在原来网络请求框架上处理流程中添加一个方法，用以打印请求URL和请求参数。如果请求方式是GET，不妨直接把URL和参数拼接好，然后再打印。如果是post请求，相对麻烦一些，写一个html文件，用打印出来的URL和请求参数构建一个form表单，通过form表单，在浏览器中请求。</p>
+<p>OK，现在你手里面有一个完整的URL或表单请求，如果后端同学不肯弯腰捡肥皂，你就可以把东西丢给他让他自己反省。</p>
+<p>下面贴一下我用的表单：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>打脸神器<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">    input&#123;</div><div class="line">      margin: 8px auto 8px 8px;</div><div class="line">    &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://www.baidu.com/s"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>word<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"word"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-客户端到底有没有传某个字段到服务端？"><a href="#2-客户端到底有没有传某个字段到服务端？" class="headerlink" title="2. 客户端到底有没有传某个字段到服务端？"></a>2. 客户端到底有没有传某个字段到服务端？</h2><p>有的时候自己都不确定调用接口的时候有没有把要求的字段传过去，这个时候完全看服务端大爷的脸色吗？怎么可能？他们还没那么拽(不过话又说回来，当你没有更好的办法的时候还是态度好一点，跟人家好好配合)。方法也就一句话:”在服务端检查一下客户端的传参”。快下班了，就不瞎扯别的了，赶紧写完收工。</p>
+<p>直接讲我的做法，我在自己电脑上搭了一个PHP环境(PHP简单好用，你值得拥有)，然后把请求的URL重定向到本地的PHP页面。比如我的电脑局域网ip是 192.168.1.66，PHP服务器运行在80端口，PHP页面是index.php,客户端别的都不用变，只用把请求URL改成<a href="http://192.168.1.66:80/demo/index.php" target="_blank" rel="external">http://192.168.1.66:80/demo/index.php</a> 就可以在PHP服务器上接收到请求了。检验字段什么的，都不在话下。</p>
+<p>这句神奇的PHP代码就是<code>echo $_REQUEST[&#39;参数名称&#39;]</code>。</p>
+<h2 id="3-服务端要求传数组，可是Http请求里面的数组是个什么鬼？"><a href="#3-服务端要求传数组，可是Http请求里面的数组是个什么鬼？" class="headerlink" title="3. 服务端要求传数组，可是Http请求里面的数组是个什么鬼？"></a>3. 服务端要求传数组，可是Http请求里面的数组是个什么鬼？</h2><p>这个内容其实可以算是<code>2</code>的一个引申。服务端说让客户端传数组，前端同学一脸的懵比，What 数组？？？懵归懵，我还是有一点思路的。像<code>2</code>一样，我把请求重新定向到本地PHP页面，然后不断的改客户端代码，根据PHP的接收情况，不断尝试终于被我发现了真相！其实所谓的数组是一伪名词，客户端传过去的数据是这个样子的：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array[0]=value0&amp;array[1]=value1</div></pre></td></tr></table></figure></p>
+<p>看完之后你可能也有点懵，直接上代码看看我是怎么处理的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Map&lt;String,String&gt; params = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">String array[] = <span class="keyword">new</span> String[]&#123;<span class="string">"value0"</span>,<span class="string">"value1"</span>&#125;;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;array.length;i++)&#123;</div><div class="line">    params.put(String.format(<span class="string">"array[%d]"</span>,i),array[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样一来，服务端就能按照解析数组来解析客户端的请求参数了。<br>上面介绍的方法并不局限于上面所提到的问题，开发过程中遇到的很多问题都可以用上面的方法来解决。<br>突然想到，如果使用fiddler抓包工具。。。难道我是拿着lowB技术在开车?不行，我得去研究一下！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/这个字段到底有没有返回/" data-id="cj0uytlgk000rawjhh4nsjlpl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
   
 </article>
 
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/hello-world/" class="article-date">
+  <time datetime="2017-03-26T17:11:48.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/hello-world/" data-id="cj0uytlgd000mawjhfr50d870" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 </section>
         
           <aside id="sidebar">
